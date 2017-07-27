@@ -14,14 +14,14 @@ import FirebaseDatabase
 
 
 class LoginControl : UIViewController{
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        loginButton.layer.cornerRadius = 12
     }
     
     override func didReceiveMemoryWarning() {
