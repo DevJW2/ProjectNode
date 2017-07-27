@@ -235,7 +235,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BpJ-AA-I1L" customClass="MadokaTextField" customModule="ProjectNode">
-                                                <rect key="frame" x="0.0" y="0.0" width="171.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="172" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="xgq-ZB-bty"/>
@@ -253,7 +253,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ixN-9A-VfQ" customClass="MadokaTextField" customModule="ProjectNode">
-                                                <rect key="frame" x="171.5" y="0.0" width="171.5" height="50"/>
+                                                <rect key="frame" x="172" y="0.0" width="171" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="171.5" id="P63-gi-8rk"/>
