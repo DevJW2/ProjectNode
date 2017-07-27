@@ -19,7 +19,6 @@
 		0D11967E1F2909BB00E9805D /* YokoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1196741F2909BB00E9805D /* YokoTextField.swift */; };
 		0D11967F1F2909BB00E9805D /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1196751F2909BB00E9805D /* YoshikoTextField.swift */; };
 		0D91F4AB1F27859600C1EB7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D91F4AA1F27859600C1EB7E /* AppDelegate.swift */; };
-		0D91F4AD1F27859600C1EB7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D91F4AC1F27859600C1EB7E /* ViewController.swift */; };
 		0D91F4B01F27859600C1EB7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D91F4AE1F27859600C1EB7E /* Main.storyboard */; };
 		0D91F4B21F27859600C1EB7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D91F4B11F27859600C1EB7E /* Assets.xcassets */; };
 		0D91F4B51F27859600C1EB7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D91F4B31F27859600C1EB7E /* LaunchScreen.storyboard */; };
@@ -31,6 +30,8 @@
 		0D91F4D81F27C19000C1EB7E /* PageThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D91F4D71F27C18F00C1EB7E /* PageThreeViewController.swift */; };
 		0D91F4E01F27D37700C1EB7E /* SignInControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D91F4DF1F27D37700C1EB7E /* SignInControl.swift */; };
 		0D91F4E21F27D40D00C1EB7E /* LoginControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D91F4E11F27D40D00C1EB7E /* LoginControl.swift */; };
+		0DF132CC1F2A446B007675C2 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132CB1F2A446B007675C2 /* LoadingOverlay.swift */; };
+		0DF132CE1F2A5039007675C2 /* HubController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132CD1F2A5039007675C2 /* HubController.swift */; };
 		9D2E21CBF1439BC70FADFFA4 /* Pods_ProjectNode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +50,6 @@
 		0D1196751F2909BB00E9805D /* YoshikoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YoshikoTextField.swift; path = TextFieldEffects/YoshikoTextField.swift; sourceTree = "<group>"; };
 		0D91F4A71F27859600C1EB7E /* ProjectNode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectNode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D91F4AA1F27859600C1EB7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0D91F4AC1F27859600C1EB7E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0D91F4AF1F27859600C1EB7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D91F4B11F27859600C1EB7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D91F4B41F27859600C1EB7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,6 +62,8 @@
 		0D91F4D71F27C18F00C1EB7E /* PageThreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageThreeViewController.swift; sourceTree = "<group>"; };
 		0D91F4DF1F27D37700C1EB7E /* SignInControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInControl.swift; sourceTree = "<group>"; };
 		0D91F4E11F27D40D00C1EB7E /* LoginControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControl.swift; sourceTree = "<group>"; };
+		0DF132CB1F2A446B007675C2 /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
+		0DF132CD1F2A5039007675C2 /* HubController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HubController.swift; sourceTree = "<group>"; };
 		288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectNode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F3C34A7B606D6CC056DEC1 /* Pods-ProjectNode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.release.xcconfig"; sourceTree = "<group>"; };
 		BDF5C2350D0D50BF4F6F7B3E /* Pods-ProjectNode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -152,7 +154,6 @@
 		0D91F4BE1F27863400C1EB7E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0D91F4AC1F27859600C1EB7E /* ViewController.swift */,
 				0D91F4CB1F27940700C1EB7E /* LoginViewController.swift */,
 				0D91F4CD1F27945100C1EB7E /* LoginPageController.swift */,
 				0D91F4D11F27B71F00C1EB7E /* PageOneViewController.swift */,
@@ -160,6 +161,7 @@
 				0D91F4D71F27C18F00C1EB7E /* PageThreeViewController.swift */,
 				0D91F4DF1F27D37700C1EB7E /* SignInControl.swift */,
 				0D91F4E11F27D40D00C1EB7E /* LoginControl.swift */,
+				0DF132CD1F2A5039007675C2 /* HubController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -174,6 +176,7 @@
 		0D91F4C01F27863F00C1EB7E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0DF132CB1F2A446B007675C2 /* LoadingOverlay.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				0D11967B1F2909BB00E9805D /* MadokaTextField.swift in Sources */,
 				0D1196771F2909BB00E9805D /* HoshiTextField.swift in Sources */,
 				0D11967F1F2909BB00E9805D /* YoshikoTextField.swift in Sources */,
+				0DF132CC1F2A446B007675C2 /* LoadingOverlay.swift in Sources */,
 				0D91F4D21F27B71F00C1EB7E /* PageOneViewController.swift in Sources */,
 				0D11967C1F2909BB00E9805D /* MinoruTextField.swift in Sources */,
 				0D11967A1F2909BB00E9805D /* KaedeTextField.swift in Sources */,
@@ -333,7 +337,7 @@
 				0D91F4CC1F27940700C1EB7E /* LoginViewController.swift in Sources */,
 				0D91F4D61F27C17B00C1EB7E /* PageTwoViewController.swift in Sources */,
 				0D1196761F2909BB00E9805D /* AkiraTextField.swift in Sources */,
-				0D91F4AD1F27859600C1EB7E /* ViewController.swift in Sources */,
+				0DF132CE1F2A5039007675C2 /* HubController.swift in Sources */,
 				0D91F4E01F27D37700C1EB7E /* SignInControl.swift in Sources */,
 				0D91F4CE1F27945100C1EB7E /* LoginPageController.swift in Sources */,
 				0D91F4E21F27D40D00C1EB7E /* LoginControl.swift in Sources */,

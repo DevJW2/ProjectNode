@@ -30,18 +30,25 @@ class LoginControl : UIViewController{
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
-        //do form validation
-        
+        //ADD CHANGING EMAIL AND PASSWORD FUNCTIONALITY
+        self.loginButton.isEnabled = false
         if let email = emailTextField.text, let password = passwordTextField.text{
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if let user = user{
                     //user is found, go to new screen
+                    LoadingOverlay.shared.showOverlay(view: self.view)
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "mainPage")
                     self.present(vc, animated: true, completion: nil)
+                    LoadingOverlay.shared.hideOverlayView()
                 }
                 else{
                     //check error and show message
+                    let alert = UIAlertController(title: "", message: "Incorrect email or password", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    self.loginButton.isEnabled = true
+
                 }
             }
             
