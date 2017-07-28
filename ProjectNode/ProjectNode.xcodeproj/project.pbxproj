@@ -32,6 +32,7 @@
 		0DF132E41F2A707E007675C2 /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132DC1F2A707E007675C2 /* PageOneViewController.swift */; };
 		0DF132E81F2A70CD007675C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DF132E61F2A70CD007675C2 /* GoogleService-Info.plist */; };
 		0DF132EA1F2A70E6007675C2 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132E91F2A70E6007675C2 /* LoadingOverlay.swift */; };
+		0DF132F21F2A9AF3007675C2 /* ProjectCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132F11F2A9AF3007675C2 /* ProjectCreator.swift */; };
 		9D2E21CBF1439BC70FADFFA4 /* Pods_ProjectNode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		0DF132E51F2A70CD007675C2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Supporting/Info.plist; sourceTree = "<group>"; };
 		0DF132E61F2A70CD007675C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Supporting/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0DF132E91F2A70E6007675C2 /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingOverlay.swift; path = Models/LoadingOverlay.swift; sourceTree = "<group>"; };
+		0DF132F11F2A9AF3007675C2 /* ProjectCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectCreator.swift; path = Controllers/ProjectCreator.swift; sourceTree = "<group>"; };
 		288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectNode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F3C34A7B606D6CC056DEC1 /* Pods-ProjectNode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.release.xcconfig"; sourceTree = "<group>"; };
 		BDF5C2350D0D50BF4F6F7B3E /* Pods-ProjectNode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		0D91F4BE1F27863400C1EB7E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0DF132F11F2A9AF3007675C2 /* ProjectCreator.swift */,
 				0DF132D51F2A707E007675C2 /* LoginControl.swift */,
 				0DF132D61F2A707E007675C2 /* SignInControl.swift */,
 				0DF132D71F2A707E007675C2 /* HubController.swift */,
@@ -331,6 +334,7 @@
 				0DF132DF1F2A707E007675C2 /* HubController.swift in Sources */,
 				0D1196771F2909BB00E9805D /* HoshiTextField.swift in Sources */,
 				0D11967F1F2909BB00E9805D /* YoshikoTextField.swift in Sources */,
+				0DF132F21F2A9AF3007675C2 /* ProjectCreator.swift in Sources */,
 				0D11967C1F2909BB00E9805D /* MinoruTextField.swift in Sources */,
 				0DF132E11F2A707E007675C2 /* PageThreeViewController.swift in Sources */,
 				0DF132DD1F2A707E007675C2 /* LoginControl.swift in Sources */,

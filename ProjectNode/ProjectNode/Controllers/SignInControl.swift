@@ -30,6 +30,12 @@ class SignInControl : UIViewController{
         ref = Database.database().reference()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        //NSApplication.sharedApplication().windows[0].makeFirstResponder(nameTextField)
+        nameTextField.becomeFirstResponder()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

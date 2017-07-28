@@ -176,6 +176,17 @@
                                     <action selector="loginButtonTapped:" destination="06m-Tp-WSV" eventType="touchUpInside" id="9tc-sl-wHm"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XfP-mu-hQP">
+                                <rect key="frame" x="109" y="617" width="157" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="157" id="gQr-op-paP"/>
+                                    <constraint firstAttribute="height" constant="30" id="iHW-1x-znj"/>
+                                </constraints>
+                                <state key="normal" title="Forgot your password?"/>
+                                <connections>
+                                    <action selector="forgetPasswordTapped:" destination="06m-Tp-WSV" eventType="touchUpInside" id="tdv-mf-5nJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -184,8 +195,10 @@
                             <constraint firstItem="nSn-45-cvz" firstAttribute="leading" secondItem="zGl-6K-dbO" secondAttribute="leadingMargin" id="DzU-DB-O59"/>
                             <constraint firstItem="jmO-OO-Cef" firstAttribute="leading" secondItem="zGl-6K-dbO" secondAttribute="leading" id="L7O-16-eha"/>
                             <constraint firstItem="jmO-OO-Cef" firstAttribute="top" secondItem="Fgy-gM-mD6" secondAttribute="bottom" id="MSs-W3-dgU"/>
+                            <constraint firstItem="XfP-mu-hQP" firstAttribute="centerX" secondItem="zGl-6K-dbO" secondAttribute="centerX" id="QK8-yW-Trh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nSn-45-cvz" secondAttribute="trailing" id="cOy-Jd-PTX"/>
                             <constraint firstItem="nSn-45-cvz" firstAttribute="centerX" secondItem="zGl-6K-dbO" secondAttribute="centerX" id="eTK-B3-a11"/>
+                            <constraint firstItem="2SR-Ar-DER" firstAttribute="top" secondItem="XfP-mu-hQP" secondAttribute="bottom" constant="20" id="fL0-hw-Miq"/>
                             <constraint firstItem="1Wn-Kt-uy1" firstAttribute="centerX" secondItem="zGl-6K-dbO" secondAttribute="centerX" id="ifF-ol-GnX"/>
                             <constraint firstItem="jmO-OO-Cef" firstAttribute="width" secondItem="zGl-6K-dbO" secondAttribute="width" id="pXX-mp-Poi"/>
                             <constraint firstItem="1Wn-Kt-uy1" firstAttribute="top" secondItem="nSn-45-cvz" secondAttribute="bottom" constant="22" id="pl3-Dv-7uH"/>
@@ -194,6 +207,8 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="0I1-CM-JS6" id="Ycb-I5-U8Q"/>
+                        <outlet property="forgetPassword" destination="XfP-mu-hQP" id="wJ7-Ma-IVK"/>
+                        <outlet property="forgetPasswordBottomConstraint" destination="fL0-hw-Miq" id="wOq-Of-3t7"/>
                         <outlet property="loginButton" destination="1Wn-Kt-uy1" id="4Ey-jY-pmw"/>
                         <outlet property="passwordTextField" destination="aoE-kU-7xT" id="Gau-fT-r2L"/>
                     </connections>

@@ -17,16 +17,58 @@ class LoginControl : UIViewController{
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var forgetPassword: UIButton!
+    @IBOutlet weak var forgetPasswordBottomConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         loginButton.layer.cornerRadius = 12
+        NotificationCenter.default.addObserver(self, selector: #selector( keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        emailTextField.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func keyboardWillShow(notification: NSNotification){
+        if let info = notification.userInfo{
+            let rect: CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+            
+            self.view.layoutIfNeeded()
+            
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.view.layoutIfNeeded()
+                self.forgetPasswordBottomConstraint.constant = rect.height + 20
+            
+            })
+        
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        if let info = notification.userInfo{
+            //let rect: CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
+            
+            self.view.layoutIfNeeded()
+            
+            UIView.animate(withDuration: 0.25, animations:{
+                self.view.layoutIfNeeded()
+                self.forgetPasswordBottomConstraint.constant = 20
+            })
+        
+        }
+    }
+
+    @IBAction func forgetPasswordTapped(_ sender: Any) {
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
