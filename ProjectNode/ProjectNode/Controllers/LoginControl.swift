@@ -19,6 +19,9 @@ class LoginControl : UIViewController{
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgetPassword: UIButton!
     @IBOutlet weak var forgetPasswordBottomConstraint: NSLayoutConstraint!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -37,6 +40,8 @@ class LoginControl : UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    
     
     func keyboardWillShow(notification: NSNotification){
         if let info = notification.userInfo{
@@ -44,12 +49,13 @@ class LoginControl : UIViewController{
             
             self.view.layoutIfNeeded()
             
-            
+            if UIDevice.current.orientation.isPortrait{
             UIView.animate(withDuration: 0.25, animations: {
                 self.view.layoutIfNeeded()
                 self.forgetPasswordBottomConstraint.constant = rect.height + 20
             
             })
+            }
         
         }
     }
