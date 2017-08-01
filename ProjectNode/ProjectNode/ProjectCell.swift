@@ -9,15 +9,19 @@
 import Foundation
 import UIKit
 
+
+
 class BaseCell : UICollectionViewCell{
     override init(frame: CGRect){
         super.init(frame: frame)
         setupViews()
+        
     }
     
     func setupViews(){
     
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init coder has not been implemented")
@@ -35,6 +39,7 @@ class ProjectCell: BaseCell{
             
         }
     }
+ 
     
     //NAME OF PROJECT
     let nameLabel: UILabel = {
@@ -64,16 +69,30 @@ class ProjectCell: BaseCell{
     }()
     
     //GET PROJECT PREVIEW, SNAPSHOTS
-    let projectPreview: UIImageView = {
+    /*let projectPreview: UIImageView = {
         let preview = UIImageView()
         // preview.backgroundColor = UIColor.red
         preview.translatesAutoresizingMaskIntoConstraints = false
         //get image
-        preview.image = UIImage(named: "")
+        preview.image = UIImage(named: "projectNodeLogo")
         preview.contentMode = .scaleAspectFill
         preview.clipsToBounds = true
+
         return preview
-    }()
+    }()*/
+    
+   /* let projectPreview: UIButton = {
+        let preview = UIButton()
+        preview.translatesAutoresizingMaskIntoConstraints = false
+        preview.backgroundColor = UIColor.blue
+        //preview.setBackgroundImage(UIImage(named: "projectNodeLogo"), for: .normal)
+        //preview.contentMode = .scaleAspectFill
+        //preview.clipsToBounds = true
+        preview.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+         
+        return preview
+        
+    }()*/
     
     let separatorView: UIView = {
         let view = UIView()
@@ -100,8 +119,20 @@ class ProjectCell: BaseCell{
         return tagV
     }()
     
+    func previewTapped(sender: UIButton!) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "previewTappedNotification"), object: nil)
+    }
+  
+    
     override func setupViews(){
         //backgroundColor = UIColor.blue
+        
+        let projectPreview = UIButton()
+        projectPreview.translatesAutoresizingMaskIntoConstraints = false
+        projectPreview.backgroundColor = UIColor.blue
+        projectPreview.addTarget(self, action: #selector(previewTapped), for: .touchUpInside)
+        
+        
         addSubview(projectPreview)
         addSubview(separatorView)
         addSubview(nameLabel)

@@ -9,8 +9,12 @@
 import Foundation
 import UIKit
 
-class HubController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,ProjectCreatorDelegate{
+class HubController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,ProjectCreatorDelegate, UISearchBarDelegate{
+    //Search funcionality
+    //var isSearching = false
+    
 
+    @IBOutlet weak var projectSearch: UISearchBar!
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
     var collectionView: UICollectionView!
@@ -50,6 +54,8 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         
         self.view.addConstraints([topConstraints, bottomConstraints, leftConstraints, rightConstraints])
         
+        NotificationCenter.default.addObserver(self, selector: #selector(previewTapped), name: NSNotification.Name(rawValue: "previewTappedNotification"), object: nil)
+        
     }
     
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
@@ -63,6 +69,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         }
         
     }
+    
     
     func formCompleted(nameProject : String?, tag: Int?) {
         collectionView.reloadData()
@@ -82,7 +89,12 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         }
         nodeProjects.append(node)
     }
-
+    
+    func previewTapped(){
+        let storyboard = UIStoryboard(name: "LayoutEditor", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "nodePage")
+        self.present(vc, animated: true, completion: nil)
+    }
     
     
     //EXPERIMENT WITH THIS LATER
@@ -140,9 +152,25 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         return 0
     }
     
+    //Search bar functionality
+    /*
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        if searchBar.text == nil || searchBar.text == ""{
+            isSearching = false
+            view.endEditing(true)
+            collectionView.reloadData()
+            
+        }
+        else{
+            isSearching = true
+            filteredAccounts = accounts.filter({$0.contains(searchBar.text!)})
+            collectionView.reloadData()
+        }
+    
+    }*/
+    //--------------
+    
     @IBAction func addButtonTapped(_ sender: Any) {
-        //collectionView.reloadData()
-        //print(value)
     }
 }
 

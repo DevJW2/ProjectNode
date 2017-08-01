@@ -35,6 +35,9 @@
 		0DF132F21F2A9AF3007675C2 /* ProjectCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132F11F2A9AF3007675C2 /* ProjectCreator.swift */; };
 		0DF132F41F2F82E8007675C2 /* NodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132F31F2F82E8007675C2 /* NodeProject.swift */; };
 		0DF132F61F2F8924007675C2 /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132F51F2F8924007675C2 /* ProjectCell.swift */; };
+		0DF132F81F2FC496007675C2 /* LayoutEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF132F71F2FC496007675C2 /* LayoutEditor.storyboard */; };
+		0DF132FA1F2FC569007675C2 /* NodeMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132F91F2FC569007675C2 /* NodeMapController.swift */; };
+		0DF132FC1F2FC5B5007675C2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132FB1F2FC5B5007675C2 /* Node.swift */; };
 		9D2E21CBF1439BC70FADFFA4 /* Pods_ProjectNode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +73,9 @@
 		0DF132F11F2A9AF3007675C2 /* ProjectCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectCreator.swift; path = Controllers/ProjectCreator.swift; sourceTree = "<group>"; };
 		0DF132F31F2F82E8007675C2 /* NodeProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NodeProject.swift; path = Models/NodeProject.swift; sourceTree = "<group>"; };
 		0DF132F51F2F8924007675C2 /* ProjectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		0DF132F71F2FC496007675C2 /* LayoutEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LayoutEditor.storyboard; sourceTree = "<group>"; };
+		0DF132F91F2FC569007675C2 /* NodeMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeMapController.swift; sourceTree = "<group>"; };
+		0DF132FB1F2FC5B5007675C2 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectNode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F3C34A7B606D6CC056DEC1 /* Pods-ProjectNode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.release.xcconfig"; sourceTree = "<group>"; };
 		BDF5C2350D0D50BF4F6F7B3E /* Pods-ProjectNode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 				0DF132CF1F2A7055007675C2 /* Login.storyboard */,
 				0DF132D01F2A7055007675C2 /* Main.storyboard */,
 				0DF132D11F2A7055007675C2 /* LaunchScreen.storyboard */,
+				0DF132F71F2FC496007675C2 /* LayoutEditor.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -169,6 +176,7 @@
 				0DF132DA1F2A707E007675C2 /* PageTwoViewController.swift */,
 				0DF132DB1F2A707E007675C2 /* LoginPageController.swift */,
 				0DF132DC1F2A707E007675C2 /* PageOneViewController.swift */,
+				0DF132F91F2FC569007675C2 /* NodeMapController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 			children = (
 				0DF132E91F2A70E6007675C2 /* LoadingOverlay.swift */,
 				0DF132F31F2F82E8007675C2 /* NodeProject.swift */,
+				0DF132FB1F2FC5B5007675C2 /* Node.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 				0D91F4B21F27859600C1EB7E /* Assets.xcassets in Resources */,
 				0DF132D21F2A7055007675C2 /* Login.storyboard in Resources */,
 				0DF132D41F2A7055007675C2 /* LaunchScreen.storyboard in Resources */,
+				0DF132F81F2FC496007675C2 /* LayoutEditor.storyboard in Resources */,
 				0DF132D31F2A7055007675C2 /* Main.storyboard in Resources */,
 				0DF132E81F2A70CD007675C2 /* GoogleService-Info.plist in Resources */,
 			);
@@ -334,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DF132E41F2A707E007675C2 /* PageOneViewController.swift in Sources */,
+				0DF132FC1F2FC5B5007675C2 /* Node.swift in Sources */,
 				0D11967B1F2909BB00E9805D /* MadokaTextField.swift in Sources */,
 				0DF132DE1F2A707E007675C2 /* SignInControl.swift in Sources */,
 				0DF132EA1F2A70E6007675C2 /* LoadingOverlay.swift in Sources */,
@@ -343,6 +354,7 @@
 				0DF132F21F2A9AF3007675C2 /* ProjectCreator.swift in Sources */,
 				0D11967C1F2909BB00E9805D /* MinoruTextField.swift in Sources */,
 				0DF132E11F2A707E007675C2 /* PageThreeViewController.swift in Sources */,
+				0DF132FA1F2FC569007675C2 /* NodeMapController.swift in Sources */,
 				0DF132DD1F2A707E007675C2 /* LoginControl.swift in Sources */,
 				0D11967A1F2909BB00E9805D /* KaedeTextField.swift in Sources */,
 				0D11967E1F2909BB00E9805D /* YokoTextField.swift in Sources */,
