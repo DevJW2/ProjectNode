@@ -11,25 +11,50 @@ import UIKit
 class NodeMapController : UIViewController{
     @IBOutlet weak var nodeCreator: UIButton!
     @IBOutlet weak var node: UIButton!
+    var nodeList : [Node] = [] //Has to be dictionary, each key contains an array of values[amount of nodes]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
    
     @IBAction func nodeCreatorTapped(_ sender: Any) {
-        let randomX = Int(arc4random_uniform(100) + 100)
-        let randomY = Int(arc4random_uniform(100) + 200)
+        var newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World") //creates the random Node
         
-        let button = UIButton(frame: CGRect(x: randomX, y: randomY, width: 100, height: 50))
-        button.backgroundColor = .green
-        button.setTitle("Test Button", for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        //Doesn't Work
+        if nodeList.count < 3{
+            for item in nodeList{
+                while item.nodeObj().frame.equalTo(newNode.nodeObj().frame){
+                    newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
+                }
+            }
+        }
         
-        self.view.addSubview(button)
-    }
+        
+        //New Code ----------------------
     
-    func buttonAction(sender: UIButton!) {
-        print("Button tapped")
+        
+        
+        
+        
+        
+        
+        
+        //----------------------
+  
+        self.view.addSubview(newNode.nodeObj())
+        nodeList.append(newNode)
+        
+       /* Test Code, figures out the size of the rect object created for node placement
+        let size = CGSize(width: 20 * 2, height: 20 * 2)
+        //later on the center point will be the selected node
+        let centerPoint = CGPoint(x : Int(UIScreen.main.bounds.width/2) - Int(size.width/2),y : Int(UIScreen.main.bounds.height/2) - Int(size.height/2))
+        
+        let tempRect = UIImageView(frame:CGRect(origin: centerPoint, size: size))
+        tempRect.backgroundColor = UIColor.blue
+        self.view.addSubview(tempRect)*/
+        
+    
+        
     }
     
 
