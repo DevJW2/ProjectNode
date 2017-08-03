@@ -38,6 +38,7 @@
 		0DF132F81F2FC496007675C2 /* LayoutEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF132F71F2FC496007675C2 /* LayoutEditor.storyboard */; };
 		0DF132FA1F2FC569007675C2 /* NodeMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132F91F2FC569007675C2 /* NodeMapController.swift */; };
 		0DF132FC1F2FC5B5007675C2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132FB1F2FC5B5007675C2 /* Node.swift */; };
+		0DFE44731F32602600F9B54A /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFE44721F32602600F9B54A /* MainTabController.swift */; };
 		9D2E21CBF1439BC70FADFFA4 /* Pods_ProjectNode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		0DF132F71F2FC496007675C2 /* LayoutEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LayoutEditor.storyboard; sourceTree = "<group>"; };
 		0DF132F91F2FC569007675C2 /* NodeMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeMapController.swift; sourceTree = "<group>"; };
 		0DF132FB1F2FC5B5007675C2 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		0DFE44721F32602600F9B54A /* MainTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectNode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F3C34A7B606D6CC056DEC1 /* Pods-ProjectNode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.release.xcconfig"; sourceTree = "<group>"; };
 		BDF5C2350D0D50BF4F6F7B3E /* Pods-ProjectNode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				0DF132DB1F2A707E007675C2 /* LoginPageController.swift */,
 				0DF132DC1F2A707E007675C2 /* PageOneViewController.swift */,
 				0DF132F91F2FC569007675C2 /* NodeMapController.swift */,
+				0DFE44721F32602600F9B54A /* MainTabController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				0DF132DE1F2A707E007675C2 /* SignInControl.swift in Sources */,
 				0DF132EA1F2A70E6007675C2 /* LoadingOverlay.swift in Sources */,
 				0DF132DF1F2A707E007675C2 /* HubController.swift in Sources */,
+				0DFE44731F32602600F9B54A /* MainTabController.swift in Sources */,
 				0D1196771F2909BB00E9805D /* HoshiTextField.swift in Sources */,
 				0D11967F1F2909BB00E9805D /* YoshikoTextField.swift in Sources */,
 				0DF132F21F2A9AF3007675C2 /* ProjectCreator.swift in Sources */,

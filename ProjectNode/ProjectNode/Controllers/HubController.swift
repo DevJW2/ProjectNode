@@ -58,10 +58,6 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
-    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask(rawValue: UInt(Int(UIInterfaceOrientationMask.portrait.rawValue)))
-    }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let ProjectCreator = segue.destination as? ProjectCreator{

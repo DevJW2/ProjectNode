@@ -11,62 +11,108 @@ import UIKit
 
 class Node : NSObject{
     //properties
-    var distance: Int
+    var distance: Double
     var color: UIColor
-    var size: CGFloat
+    var size: Double
     var name: String
+    var nodeLimit: Int = 0
     
-    init(_distance: Int, _color: UIColor, _size: CGFloat, _name: String){
+    var node: UIButton?
+    
+    //for the creation of the first node 
+    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _xCoordinate : Double, _yCoordinate: Double){
         distance = _distance
         color = _color
         size = _size
         name = _name
         
+        node = UIButton(frame: CGRect(x: _xCoordinate, y: _yCoordinate, width: size, height: size))
+        
+        //More Node properties
+        node!.layer.cornerRadius = CGFloat(size/2.0)
+        node!.layer.backgroundColor = UIColor.blue.cgColor
+
     }
     
-    func distanceFormula(x : Double, y : Double, _x : Double, _y : Double) -> Double{
-        return sqrt(pow((x - y),2) + pow((_x - _y),2))
+    
+    init(_distance: Double, _color: UIColor, _size: Double, _name: String){
+        distance = _distance
+        color = _color
+        size = _size
+        name = _name
+        
+        //generate angles
+        let randomAngle = Double(arc4random_uniform(361))
+        
+        //Generate locations based off angles
+        let xCoordinate = distance * cos(randomAngle * (Double.pi / 180)) + Double(selectedNode!.getNode().frame.origin.x)
+        let yCoordinate = distance * sin(randomAngle * (Double.pi / 180)) + Double(selectedNode!.getNode().frame.origin.y)
+        
+        node = UIButton(frame: CGRect(x: xCoordinate, y: yCoordinate, width: size, height: size))
+        
+        //More Node properties
+        node!.layer.cornerRadius = CGFloat(size/2.0)
+        node!.layer.backgroundColor = UIColor.blue.cgColor
+        
+        
     }
     
-    func nodeObj() -> UIButton{
-        
-        var locationX : CGFloat?
-        var locationY : CGFloat?
-        
-        let randomLocation = Int(arc4random_uniform(3))
-        
-        let rectSize = CGSize(width: distance * 2, height: distance * 2)
-        //later on the center point will be the selected node
-        let centerPoint = CGPoint(x : Int(UIScreen.main.bounds.width/2) - Int(rectSize.width/2),y : Int(UIScreen.main.bounds.height/2) - Int(rectSize.height/2))
-        
-        let tempRect = CGRect(origin: centerPoint, size: rectSize)
-        
-        if randomLocation == 0{
-            locationX = tempRect.maxX
-            locationY = tempRect.maxY
-        }
-        else if randomLocation == 1{
-            locationX = tempRect.minX - size
-            locationY = tempRect.maxY
-        }
-        else if randomLocation == 2{
-            locationX = tempRect.midX - size/2
-            locationY = tempRect.minY - size
-        }
-        
-        let node = UIButton(frame: CGRect(x: locationX!, y: locationY!, width: size, height: size))
-        node.layer.cornerRadius = size/2
-        node.backgroundColor = .black
-        //button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        return node
+    func getLimit() -> Int{
+        return nodeLimit
+    }
+    
+    
+    func getNode() -> UIButton{
+        node!.addTarget(self, action: #selector(nodeSelection), for: .touchUpInside)
+        return node!
     }
     
     func updateNodes(){
-    
+        
     }
-    
+    //Selects current node and highlights it for editing/movement/adding
+    func nodeSelection(){
+        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "selectedNodeNotification"), object: nil)
+        selectedNode = self
+        selectedNode!.getNode().backgroundColor = UIColor.red
+    }
     
     
 
 
 }
+
+
+/*   Previous Code
+ 
+     var locationX : CGFloat?
+     var locationY : CGFloat?
+     
+     let randomLocation = Int(arc4random_uniform(3))
+     
+     let rectSize = CGSize(width: distance * 2, height: distance * 2)
+     //later on the center point will be the selected node
+     let centerPoint = CGPoint(x : Int(UIScreen.main.bounds.width/2) - Int(rectSize.width/2),y : Int(UIScreen.main.bounds.height/2) - Int(rectSize.height/2))
+     
+     let tempRect = CGRect(origin: centerPoint, size: rectSize)
+     //var allLocation : [CGPoint] = [CGPoint(x: tempRect.maxX, y: tempRect.maxY), CGPoint(x: tempRect.minX - size, y:tempRect.max), CGPoint(x: tempRect.midX - size/2, y:tempRect.minY - size)]
+     
+     if randomLocation == 0{
+         locationX = tempRect.maxX
+         locationY = tempRect.maxY
+     }
+     else if randomLocation == 1{
+         locationX = tempRect.minX - size
+         locationY = tempRect.maxY
+     }
+     else if randomLocation == 2{
+         locationX = tempRect.midX - size/2
+         locationY = tempRect.minY - size
+     }
+ */
+
+
+
+
+
+

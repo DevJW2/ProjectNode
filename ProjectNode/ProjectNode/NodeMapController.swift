@@ -8,54 +8,93 @@
 
 import Foundation
 import UIKit
+
+var selectedNode : Node?
+
 class NodeMapController : UIViewController{
     @IBOutlet weak var nodeCreator: UIButton!
-    @IBOutlet weak var node: UIButton!
     var nodeList : [Node] = [] //Has to be dictionary, each key contains an array of values[amount of nodes]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-   
-    @IBAction func nodeCreatorTapped(_ sender: Any) {
-        var newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World") //creates the random Node
+    
         
-        //Doesn't Work
-        if nodeList.count < 3{
-            for item in nodeList{
-                while item.nodeObj().frame.equalTo(newNode.nodeObj().frame){
-                    newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
-                }
-            }
+        let ancestorNode = Node(_distance: 50, _color: UIColor.blue, _size: 20, _name: "Hello World", _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
+        nodeList.append(ancestorNode)
+        self.view.addSubview(ancestorNode.getNode())
+    
+        //NotificationCenter.default.addObserver(self, selector: #selector(highlightNode), name: NSNotification.Name(rawValue: "selectedNodeNotification"), object: nil)
+        
+    }
+    
+    @IBAction func nodeCreatorTapped(_ sender: Any) {
+        if selectedNode!.getLimit() < 5{
+            let newNode = Node(_distance: 50, _color: UIColor.blue, _size: 20, _name: "Hello World")
+            nodeList.append(newNode)
+            self.view.addSubview(newNode.getNode())
+            selectedNode!.nodeLimit += 1
+        }
+        else{
+            print("can't print any more nodes")
         }
         
         
-        //New Code ----------------------
-    
-        
-        
-        
-        
-        
-        
-        
-        //----------------------
-  
-        self.view.addSubview(newNode.nodeObj())
-        nodeList.append(newNode)
-        
-       /* Test Code, figures out the size of the rect object created for node placement
-        let size = CGSize(width: 20 * 2, height: 20 * 2)
-        //later on the center point will be the selected node
-        let centerPoint = CGPoint(x : Int(UIScreen.main.bounds.width/2) - Int(size.width/2),y : Int(UIScreen.main.bounds.height/2) - Int(size.height/2))
-        
-        let tempRect = UIImageView(frame:CGRect(origin: centerPoint, size: size))
-        tempRect.backgroundColor = UIColor.blue
-        self.view.addSubview(tempRect)*/
-        
-    
-        
     }
     
+    
+
 
 }
+/* PREVIOUS CODE
+ 
+//DO NOT USE CGRECT COMPARATORS
+
+func addNode(){
+    //var newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
+    var flag = false
+    if nodeList.count == 0{
+        let newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
+        nodeList.append(newNode)
+        self.view.addSubview(newNode.nodeObj())
+        print("FIRST NODE CREATED")
+    }
+    else{
+        while flag == false{
+            let newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
+            for index in 0..<nodeList.count{
+                print("Index: ")
+                print(index)
+                print("Node List: ")
+                print(nodeList)
+                print("first Node frame: ")
+                print(nodeList[0].nodeObj().frame)
+                print("New node created: ")
+                print(newNode.nodeObj().frame)
+                print("equal or not")
+                print(newNode.nodeObj() == nodeList[index].nodeObj())
+                print("node list length")
+                print(nodeList.count - 1)
+                if (newNode.nodeObj().frame != nodeList[index].nodeObj().frame) && (index == nodeList.count - 1){
+                    print("ENTERED IF STATEMENT")
+                    print("New Node Rect: ")
+                    print(newNode.nodeObj().frame)
+                    print("Existing Node Rect: ")
+                    print(nodeList[index].nodeObj().frame)
+                    
+                    nodeList.append(newNode)
+                    print("NEW NODE CREATED")
+                    self.view.addSubview(newNode.nodeObj())
+                    flag = true
+                    break
+                }
+                else if newNode.nodeObj().frame.equalTo(nodeList[index].nodeObj().frame){
+                    print("NODE IS EQUAL")
+                    break
+                }
+            }
+            print("exiting for loop......")
+            
+        }
+    }
+}
+*/
