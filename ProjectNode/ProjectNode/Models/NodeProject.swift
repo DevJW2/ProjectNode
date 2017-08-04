@@ -15,9 +15,4 @@ class NodeProject : NSObject{
     var projectDate : String?
     var collaboratorCount : Int?
     var chosenTag : UIColor?
-    
-    
-    
-
-
 }
