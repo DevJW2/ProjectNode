@@ -21,8 +21,8 @@ class Node : NSObject{
     var connector: CAShapeLayer?
     
     //var pathConnector: UIBezierPath?
-    
     var connectedNode : Node?
+    
     //for the creation of the first node 
     init(_distance: Double, _color: UIColor, _size: Double, _name: String, _xCoordinate : Double, _yCoordinate: Double){
         distance = _distance
@@ -64,10 +64,15 @@ class Node : NSObject{
     func setConnectedNode(item: Node){
         connectedNode = item
     }
-    func getConnectedNode() -> Node{
+    func getConnectedNode() -> Node?{
         print("getting the connected node....in Node class")
-        print("connected Node: \(connectedNode!)" )
-        return connectedNode!
+        //print("connected Node: \(connectedNode!)" )
+        if connectedNode == nil{
+            return nil
+        }
+        else{
+            return connectedNode!
+        }
     }
     
     func addConnector(line : CAShapeLayer){

@@ -14,20 +14,22 @@ protocol ProjectCreatorDelegate : class{
 
 import Foundation
 import UIKit
-class ProjectCreator : UIViewController{
+class ProjectCreator : UIViewController, UITextFieldDelegate{
     
     weak var delegate: ProjectCreatorDelegate?
     
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var creatorView: UIView!
     @IBOutlet weak var tagSelection: UISegmentedControl!
     
+    @IBOutlet weak var exitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         creatorView.layer.cornerRadius = 12
-        creatorView.layer.borderWidth = 1
-        creatorView.layer.borderColor = UIColor.black.cgColor
+        doneButton.layer.cornerRadius = 14
+        nameTextField.delegate = self
         
     }
 
@@ -42,6 +44,19 @@ class ProjectCreator : UIViewController{
             delegate?.formCompleted(nameProject: nameTextField.text, tag: tagSelection.selectedSegmentIndex)
             dismiss(animated: true, completion:nil)
         }
+    }
+    
+    @IBAction func exitButtonTapped(_ sender: Any) {
+          dismiss(animated: true, completion:nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        self.view.endEditing(true)
+        return false
     }
 
     

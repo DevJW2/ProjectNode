@@ -21,7 +21,7 @@ class NodeMapController : UIViewController{
         super.viewDidLoad()
     
         print("first node")
-        let ancestorNode = Node(_distance: 50, _color: UIColor.blue, _size: 20, _name: "Hello World", _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
+        let ancestorNode = Node(_distance: 50, _color: UIColor.blue, _size: 30, _name: "Hello World", _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
         print("Node: \(ancestorNode)")
         print("append first node to list")
         nodeList.append(ancestorNode)
@@ -32,6 +32,8 @@ class NodeMapController : UIViewController{
         print("received notification from node object for pan")
         NotificationCenter.default.addObserver(self, selector: #selector(nodeSelected), name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
         
+        nodeCreator.isHidden = true
+        
     }
     @IBAction func nodeCreatorTapped(_ sender: Any) {
         print("start node creator tapped")
@@ -39,7 +41,7 @@ class NodeMapController : UIViewController{
             print("selected node is less than 3: \(selectedNode!.getLimit())")
             print("selected node: \(selectedNode!)")
             print("creating new node....")
-            newNode = Node(_distance: 50, _color: UIColor.blue, _size: 20, _name: "Hello World")
+            newNode = Node(_distance: 50, _color: UIColor.blue, _size: 30, _name: "Hello World")
             print("new node: \(newNode!)")
             nodeList.append(newNode!)
             print("append A NODE to list")
@@ -64,11 +66,30 @@ class NodeMapController : UIViewController{
     }
     
     func nodeSelected(){
+        nodeCreator.isHidden = false
         print("node is selected, nodeSelected function in nodeMap is called")
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panNode))
         selectedNode!.getNode().addGestureRecognizer(pan)
         print("setting pan to node")
         print("selectedNode: \(selectedNode!)")
+    }
+    
+   /* func updateNodes(){
+        for item in 1..<nodeList.count{
+            nodeList[item].removeConnector()
+            createNodeConnection(selectNode: nodeList[item], createdNode: nodeList[item].getConnectedNode()!)
+        }
+    }*/
+    
+    func updateNodes(){
+        for item in nodeList{
+            item.removeConnector()
+            if item.getConnectedNode() == nil{
+            }
+            else{
+            createNodeConnection(selectNode: item, createdNode: item.getConnectedNode()!)
+            }
+        }
     }
 
     func panNode(pan: UIPanGestureRecognizer){
@@ -101,10 +122,10 @@ class NodeMapController : UIViewController{
             //selectedNode!.getConnectedNode().removeConnector()
             
             print("create new connection between selectedNode and selectedNode and connected Node")
-            createNodeConnection(selectNode: selectedNode!, createdNode: selectedNode!.getConnectedNode())
+            //createNodeConnection(selectNode: selectedNode!, createdNode: selectedNode!.getConnectedNode())
             //createNodeConnection(selectNode: selectedNode!.getConnectedNode(), createdNode: selectedNode!)
             print("selectedNode: \(selectedNode!) and parent\(selectedNode!.getConnectedNode())")
-            
+            updateNodes()
             
         
         }
@@ -142,6 +163,15 @@ class NodeMapController : UIViewController{
         self.view.layer.insertSublayer(shapeLayer, at: 0)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textfield: UITextField) -> Bool{
+        self.view.endEditing(true)
+        return false
+    
+    }
     
     
 

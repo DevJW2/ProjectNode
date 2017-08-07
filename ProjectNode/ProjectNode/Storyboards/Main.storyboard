@@ -150,26 +150,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5WL-7F-Oxl">
-                                <rect key="frame" x="61" y="238" width="253" height="190"/>
+                                <rect key="frame" x="61" y="239" width="253" height="189"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7eM-OO-1z9">
-                                        <rect key="frame" x="19.5" y="18.5" width="215" height="153.5"/>
+                                        <rect key="frame" x="19.5" y="14.5" width="215" height="160.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJA-l3-OWf">
                                                 <rect key="frame" x="0.0" y="0.0" width="215" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="Jeh-ba-27G"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9v-j5-bbZ">
                                                 <rect key="frame" x="0.0" y="35.5" width="215" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="RHe-Ad-1AR"/>
+                                                </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w6B-iK-qhy">
-                                                <rect key="frame" x="0.0" y="80.5" width="215" height="29"/>
+                                                <rect key="frame" x="0.0" y="80.5" width="215" height="31"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="SIv-6u-ubh"/>
+                                                </constraints>
                                                 <segments>
                                                     <segment title="Red"/>
                                                     <segment title="Yellow"/>
@@ -178,8 +187,14 @@
                                                 </segments>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45z-Ht-gmJ">
-                                                <rect key="frame" x="0.0" y="123.5" width="215" height="30"/>
-                                                <state key="normal" title="Create"/>
+                                                <rect key="frame" x="0.0" y="125.5" width="215" height="35"/>
+                                                <color key="backgroundColor" red="0.50783405942596982" green="0.88749828553064636" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="8QA-io-6TD"/>
+                                                </constraints>
+                                                <state key="normal" title="Create">
+                                                    <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="doneButtonTapped:" destination="aEX-wQ-CbS" eventType="touchUpInside" id="5Wg-ln-gas"/>
                                                 </connections>
@@ -192,6 +207,14 @@
                                             <constraint firstItem="w6B-iK-qhy" firstAttribute="width" secondItem="7eM-OO-1z9" secondAttribute="width" id="uM2-OX-4Bc"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7Q-2P-r9g">
+                                        <rect key="frame" x="220" y="8" width="25" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="delete"/>
+                                        <connections>
+                                            <action selector="exitButtonTapped:" destination="aEX-wQ-CbS" eventType="touchUpInside" id="4s8-xI-kDm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99992352724075317" green="1" blue="0.99988299608230591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -200,7 +223,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20280393835616439" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.084708121827411165" green="0.084708121827411165" blue="0.084708121827411165" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="5WL-7F-Oxl" secondAttribute="trailing" constant="45" id="AME-RS-5uS"/>
                             <constraint firstItem="5WL-7F-Oxl" firstAttribute="centerY" secondItem="aDd-cB-vTQ" secondAttribute="centerY" id="CKH-xh-6ml"/>
@@ -210,13 +233,18 @@
                     </view>
                     <connections>
                         <outlet property="creatorView" destination="5WL-7F-Oxl" id="Lmq-83-2Cn"/>
+                        <outlet property="doneButton" destination="45z-Ht-gmJ" id="wOG-7e-HpA"/>
+                        <outlet property="exitButton" destination="s7Q-2P-r9g" id="yCO-gn-3WG"/>
                         <outlet property="nameTextField" destination="k9v-j5-bbZ" id="CXH-un-5YP"/>
                         <outlet property="tagSelection" destination="w6B-iK-qhy" id="SgR-J9-L3m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xf-2J-B4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897" y="-430"/>
+            <point key="canvasLocation" x="896.79999999999995" y="-430.43478260869568"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="delete" width="50" height="50"/>
+    </resources>
 </document>
