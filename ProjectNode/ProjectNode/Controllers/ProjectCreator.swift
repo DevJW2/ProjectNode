@@ -26,6 +26,9 @@ class ProjectCreator : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         creatorView.layer.cornerRadius = 12
+        creatorView.layer.borderWidth = 1
+        creatorView.layer.borderColor = UIColor.black.cgColor
+        
     }
 
     @IBAction func doneButtonTapped(_ sender: Any) {

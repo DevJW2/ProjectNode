@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -148,55 +149,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5WL-7F-Oxl">
-                                <rect key="frame" x="61" y="215" width="253" height="190"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5WL-7F-Oxl">
+                                <rect key="frame" x="61" y="238" width="253" height="190"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45z-Ht-gmJ">
-                                        <rect key="frame" x="102" y="114" width="46" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Create"/>
-                                        <connections>
-                                            <action selector="doneButtonTapped:" destination="aEX-wQ-CbS" eventType="touchUpInside" id="5Wg-ln-gas"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGc-VJ-8Ct">
-                                        <rect key="frame" x="21" y="38" width="60" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9v-j5-bbZ">
-                                        <rect key="frame" x="75" y="39" width="166" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w6B-iK-qhy">
-                                        <rect key="frame" x="65" y="77" width="176" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <segments>
-                                            <segment title="Red"/>
-                                            <segment title="Yellow"/>
-                                            <segment title="Green"/>
-                                            <segment title="Blue"/>
-                                        </segments>
-                                    </segmentedControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9A-Nc-bfm">
-                                        <rect key="frame" x="21" y="82" width="42" height="19"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7eM-OO-1z9">
+                                        <rect key="frame" x="19.5" y="18.5" width="215" height="153.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJA-l3-OWf">
+                                                <rect key="frame" x="0.0" y="0.0" width="215" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9v-j5-bbZ">
+                                                <rect key="frame" x="0.0" y="35.5" width="215" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w6B-iK-qhy">
+                                                <rect key="frame" x="0.0" y="80.5" width="215" height="29"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <segments>
+                                                    <segment title="Red"/>
+                                                    <segment title="Yellow"/>
+                                                    <segment title="Green"/>
+                                                    <segment title="Blue"/>
+                                                </segments>
+                                            </segmentedControl>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45z-Ht-gmJ">
+                                                <rect key="frame" x="0.0" y="123.5" width="215" height="30"/>
+                                                <state key="normal" title="Create"/>
+                                                <connections>
+                                                    <action selector="doneButtonTapped:" destination="aEX-wQ-CbS" eventType="touchUpInside" id="5Wg-ln-gas"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="k9v-j5-bbZ" firstAttribute="width" secondItem="7eM-OO-1z9" secondAttribute="width" id="Owp-UY-BQP"/>
+                                            <constraint firstItem="fJA-l3-OWf" firstAttribute="width" secondItem="7eM-OO-1z9" secondAttribute="width" id="b84-Nc-lLt"/>
+                                            <constraint firstItem="45z-Ht-gmJ" firstAttribute="width" secondItem="7eM-OO-1z9" secondAttribute="width" id="tCr-n3-prz"/>
+                                            <constraint firstItem="w6B-iK-qhy" firstAttribute="width" secondItem="7eM-OO-1z9" secondAttribute="width" id="uM2-OX-4Bc"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.80110906502738255" green="0.80291447479832712" blue="0.83046478426395942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99992352724075317" green="1" blue="0.99988299608230591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="7eM-OO-1z9" firstAttribute="centerY" secondItem="5WL-7F-Oxl" secondAttribute="centerY" id="Xir-gg-qjf"/>
+                                    <constraint firstItem="7eM-OO-1z9" firstAttribute="centerX" secondItem="5WL-7F-Oxl" secondAttribute="centerX" id="kL4-ww-ltW"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20280393835616439" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="5WL-7F-Oxl" secondAttribute="trailing" constant="45" id="AME-RS-5uS"/>
+                            <constraint firstItem="5WL-7F-Oxl" firstAttribute="centerY" secondItem="aDd-cB-vTQ" secondAttribute="centerY" id="CKH-xh-6ml"/>
+                            <constraint firstItem="5WL-7F-Oxl" firstAttribute="centerX" secondItem="aDd-cB-vTQ" secondAttribute="centerX" id="QSj-3E-uID"/>
+                            <constraint firstItem="QQR-7U-lcE" firstAttribute="top" secondItem="5WL-7F-Oxl" secondAttribute="bottom" constant="239" id="hYm-zD-ZE3"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="creatorView" destination="5WL-7F-Oxl" id="Lmq-83-2Cn"/>

@@ -65,14 +65,28 @@ class Node : NSObject{
         connectedNode = item
     }
     func getConnectedNode() -> Node{
+        print("getting the connected node....in Node class")
+        print("connected Node: \(connectedNode!)" )
         return connectedNode!
     }
     
     func addConnector(line : CAShapeLayer){
+        print("ADDING CONNECTORS")
+        print("connector: \(line)")
         connector = line
     }
     func removeConnector(){
-        connector?.removeFromSuperlayer()
+        print("removing connectors, the lines......")
+        if let legitConnector = connector {
+            print("There is a connector.")
+            print("connector: \(connector!)")
+            connector!.removeFromSuperlayer()
+            
+        } else {
+            print("NOPE. There is no connector.")
+        }
+        
+        
     }
     /*
     func addPath(path : UIBezierPath){
