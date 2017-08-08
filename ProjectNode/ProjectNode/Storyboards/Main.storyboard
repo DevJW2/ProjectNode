@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="Odx-Rh-wZl"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="Odx-Rh-wZl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAn-kB-fTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,7 +42,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="kXe-T4-tGa"/>
+                    <tabBarItem key="tabBarItem" title="Profile" id="kXe-T4-tGa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dc6-zF-fBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -61,7 +61,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="9I0-eo-Si2"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" id="9I0-eo-Si2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WE6-LU-qTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,12 +74,11 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="71H-AI-xk6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="4vk-kx-kJH" kind="relationship" relationship="viewControllers" id="e5u-X0-awO"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Xvc-1X-Dxl"/>
                         <segue destination="K3n-L8-VBg" kind="relationship" relationship="viewControllers" id="hM3-Lc-uco"/>
+                        <segue destination="4vk-kx-kJH" kind="relationship" relationship="viewControllers" id="e5u-X0-awO"/>
                         <segue destination="yKH-MU-t6h" kind="relationship" relationship="viewControllers" id="goj-7c-x7f"/>
                     </connections>
                 </tabBarController>
@@ -126,7 +125,7 @@
                             <constraint firstItem="k6P-cd-BZp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="XME-Wl-kc0"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="ByL-dP-yfI"/>
+                    <tabBarItem key="tabBarItem" title="Node" id="ByL-dP-yfI"/>
                     <connections>
                         <outlet property="addButton" destination="7dK-RQ-XWR" id="uQF-PU-oRd"/>
                         <outlet property="navBar" destination="k6P-cd-BZp" id="D25-qB-LNb"/>

@@ -120,11 +120,10 @@ class Node : NSObject{
     func nodeSelection(){
         //make color the standard, and have the highlighted node preset a color later....because users can change colors
         if selectedNode != nil{
-            selectedNode?.getNode().backgroundColor = UIColor.blue
+            selectedNode?.getNode().backgroundColor = color
         }
         selectedNode = self
-        color = UIColor.red
-        selectedNode!.getNode().backgroundColor = color
+        selectedNode!.getNode().backgroundColor = UIColor.red
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
     }

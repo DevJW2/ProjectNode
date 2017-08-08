@@ -39,6 +39,7 @@
 		0DF132FA1F2FC569007675C2 /* NodeMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132F91F2FC569007675C2 /* NodeMapController.swift */; };
 		0DF132FC1F2FC5B5007675C2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF132FB1F2FC5B5007675C2 /* Node.swift */; };
 		0DFE44731F32602600F9B54A /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFE44721F32602600F9B54A /* MainTabController.swift */; };
+		0DFE44751F39F23B00F9B54A /* NodeEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFE44741F39F23A00F9B54A /* NodeEditorController.swift */; };
 		9D2E21CBF1439BC70FADFFA4 /* Pods_ProjectNode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		0DF132F91F2FC569007675C2 /* NodeMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeMapController.swift; sourceTree = "<group>"; };
 		0DF132FB1F2FC5B5007675C2 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		0DFE44721F32602600F9B54A /* MainTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		0DFE44741F39F23A00F9B54A /* NodeEditorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NodeEditorController.swift; path = Controllers/NodeEditorController.swift; sourceTree = "<group>"; };
 		288F29CB2A97889FC0F2A5EC /* Pods_ProjectNode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectNode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F3C34A7B606D6CC056DEC1 /* Pods-ProjectNode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.release.xcconfig"; sourceTree = "<group>"; };
 		BDF5C2350D0D50BF4F6F7B3E /* Pods-ProjectNode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectNode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectNode/Pods-ProjectNode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				0DF132DC1F2A707E007675C2 /* PageOneViewController.swift */,
 				0DF132F91F2FC569007675C2 /* NodeMapController.swift */,
 				0DFE44721F32602600F9B54A /* MainTabController.swift */,
+				0DFE44741F39F23A00F9B54A /* NodeEditorController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DFE44751F39F23B00F9B54A /* NodeEditorController.swift in Sources */,
 				0DF132E41F2A707E007675C2 /* PageOneViewController.swift in Sources */,
 				0DF132FC1F2FC5B5007675C2 /* Node.swift in Sources */,
 				0D11967B1F2909BB00E9805D /* MadokaTextField.swift in Sources */,

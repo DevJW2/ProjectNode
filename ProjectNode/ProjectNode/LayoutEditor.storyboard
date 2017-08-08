@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0YO-Vc-9gJ">
-                                <rect key="frame" x="129" y="28" width="105" height="43"/>
+                                <rect key="frame" x="62" y="28" width="105" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.063012741272862563" green="0.025637237805199886" blue="0.066703680203045734" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Link Node">
@@ -33,21 +33,34 @@
                                     <action selector="nodeCreatorTapped:" destination="p38-8a-g3w" eventType="touchUpInside" id="eNJ-77-gKW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E0-td-ZMK">
+                                <rect key="frame" x="207" y="28" width="106" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.12190672588832485" green="0.12190672588832485" blue="0.12190672588832485" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Edit Node">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="editNodeTapped:" destination="p38-8a-g3w" eventType="touchUpInside" id="5Ae-D8-aIF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="editNode" destination="6E0-td-ZMK" id="0T8-EC-Ubm"/>
                         <outlet property="nodeCreator" destination="0YO-Vc-9gJ" id="jC3-Rq-OPJ"/>
+                        <segue destination="g5X-QF-200" kind="presentation" identifier="nodeEdit" id="q9Y-ky-ToF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oal-JT-WKB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="156" y="132.68365817091455"/>
         </scene>
-        <!--View Controller-->
+        <!--Node Editor Controller-->
         <scene sceneID="Lb8-7B-2aZ">
             <objects>
-                <viewController id="g5X-QF-200" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="g5X-QF-200" customClass="NodeEditorController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lZt-Xw-mHq"/>
                         <viewControllerLayoutGuide type="bottom" id="mIU-2g-egm"/>
@@ -58,10 +71,49 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-O2-fay">
                                 <rect key="frame" x="0.0" y="453.5" width="375" height="213.5"/>
-                                <color key="backgroundColor" red="0.94466663729875222" green="0.38434517746487507" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXH-mp-f0l">
+                                        <rect key="frame" x="298" y="163" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="doneEditTapped:" destination="g5X-QF-200" eventType="touchUpInside" id="h2a-RR-7t3"/>
+                                        </connections>
+                                    </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qw0-Pg-ov1">
+                                        <rect key="frame" x="182" y="52" width="185" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Yellow"/>
+                                            <segment title="Green"/>
+                                            <segment title="Red"/>
+                                            <segment title="Blue"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dTt-AM-py0">
+                                        <rect key="frame" x="8" y="50" width="149" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add People" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng3-RV-2S6">
+                                        <rect key="frame" x="276" y="8" width="91" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sr4-OM-ZQO">
+                                        <rect key="frame" x="13" y="151" width="139" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Embed Flowchart"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.84520770461416417" green="0.92090773402101878" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Mph-O2-fay" firstAttribute="leading" secondItem="Ag2-qF-feC" secondAttribute="leading" id="7ps-EO-Kij"/>
                             <constraint firstAttribute="trailing" secondItem="Mph-O2-fay" secondAttribute="trailing" id="Jsf-3n-NP3"/>
@@ -69,6 +121,9 @@
                             <constraint firstItem="Mph-O2-fay" firstAttribute="centerY" secondItem="Ag2-qF-feC" secondAttribute="centerY" multiplier="1.68" id="pFD-cX-EVL"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="doneEdit" destination="UXH-mp-f0l" id="S7N-ol-N5W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8J-ba-JKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -11,8 +11,9 @@ import UIKit
 
 var selectedNode : Node?
 
-class NodeMapController : UIViewController{
+class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     @IBOutlet weak var nodeCreator: UIButton!
+    @IBOutlet weak var editNode: UIButton!
     var nodeList : [Node] = [] //Has to be dictionary, each key contains an array of values[amount of nodes]
     var buttonCenter = CGPoint.zero
     var newNode : Node?
@@ -33,6 +34,7 @@ class NodeMapController : UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(nodeSelected), name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
         
         nodeCreator.isHidden = true
+        editNode.isHidden = true
         
     }
     @IBAction func nodeCreatorTapped(_ sender: Any) {
@@ -65,8 +67,25 @@ class NodeMapController : UIViewController{
         
     }
     
+    @IBAction func editNodeTapped(_ sender: Any) {
+        editNode.isHidden = false
+        performSegue(withIdentifier: "nodeEdit", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if let nodeEditor = segue.destination as? NodeEditorController{
+            nodeEditor.delegate = self
+        }
+    }
+    
+//OBTAINING DATA HERE
+    func nodeProperties(item: String) {
+        print(item)
+    }
+    
     func nodeSelected(){
         nodeCreator.isHidden = false
+        editNode.isHidden = false
         print("node is selected, nodeSelected function in nodeMap is called")
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panNode))
         selectedNode!.getNode().addGestureRecognizer(pan)
@@ -164,14 +183,15 @@ class NodeMapController : UIViewController{
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        if selectedNode != nil{
+            selectedNode!.getNode().backgroundColor = selectedNode!.color
+        }
+        //selectedNode = nil
+        nodeCreator.isHidden = true
+        editNode.isHidden = true
     }
     
-    func textFieldShouldReturn(_ textfield: UITextField) -> Bool{
-        self.view.endEditing(true)
-        return false
-    
-    }
+
     
     
 
