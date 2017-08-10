@@ -17,6 +17,8 @@ class Node : NSObject{
     var name: String
     var nodeLimit: Int = 0
     
+    var descript: String
+    
     var node: UIButton?
     var connector: CAShapeLayer?
     
@@ -24,11 +26,12 @@ class Node : NSObject{
     var connectedNode : Node?
     
     //for the creation of the first node 
-    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _xCoordinate : Double, _yCoordinate: Double){
+    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _descript: String, _xCoordinate : Double, _yCoordinate: Double){
         distance = _distance
         color = _color
         size = _size
         name = _name
+        descript = _descript
         
         node = UIButton(frame: CGRect(x: _xCoordinate - size/2, y: _yCoordinate - size/2, width: size, height: size))
         
@@ -36,15 +39,18 @@ class Node : NSObject{
         //More Node properties
         node!.layer.cornerRadius = CGFloat(size/2.0)
         node!.layer.backgroundColor = color.cgColor
+        node!.setTitle(name, for: UIControlState.normal)
+        node!.titleLabel?.font = UIFont(name: "Times New Roman", size: 18)
 
     }
     
     
-    init(_distance: Double, _color: UIColor, _size: Double, _name: String){
+    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _descript: String){
         distance = _distance
         color = _color
         size = _size
         name = _name
+        descript = _descript
         
         //generate angles
         let randomAngle = Double(arc4random_uniform(361))
@@ -53,14 +59,23 @@ class Node : NSObject{
         let xCoordinate = distance * cos(randomAngle * (Double.pi / 180)) + Double(selectedNode!.getNode().frame.origin.x)
         let yCoordinate = distance * sin(randomAngle * (Double.pi / 180)) + Double(selectedNode!.getNode().frame.origin.y)
         
-        node = UIButton(frame: CGRect(x: xCoordinate - size/2, y: yCoordinate - size/2, width: size, height: size))
+        node = UIButton(frame: CGRect(x: xCoordinate, y: yCoordinate, width: size, height: size))
+        
         
         //More Node properties
         node!.layer.cornerRadius = CGFloat(size/2.0)
         node!.layer.backgroundColor = color.cgColor
+        node!.setTitle(name, for: UIControlState.normal)
+        node!.titleLabel?.font = UIFont(name: "Times New Roman", size: 18)
         
         
     }
+    
+    func updateSize(value: Double){
+        size = value
+    }
+    
+    
     func setConnectedNode(item: Node){
         connectedNode = item
     }
@@ -90,9 +105,12 @@ class Node : NSObject{
         } else {
             print("NOPE. There is no connector.")
         }
-        
-        
     }
+    
+    func setDescription(text: String){
+        descript = text
+    }
+    
     /*
     func addPath(path : UIBezierPath){
         pathConnector = path
@@ -110,11 +128,6 @@ class Node : NSObject{
         
         node!.addTarget(self, action: #selector(nodeSelection), for: .touchUpInside)
         return node!
-    }
-    
-    func updateNodes(){
-        
-        
     }
     //Selects current node and highlights it for editing/movement/adding
     func nodeSelection(){

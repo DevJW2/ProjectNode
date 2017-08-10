@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="Odx-Rh-wZl"/>
+                    <tabBarItem key="tabBarItem" title="Project Map" id="Odx-Rh-wZl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAn-kB-fTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -61,7 +61,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notifications" id="9I0-eo-Si2"/>
+                    <tabBarItem key="tabBarItem" title="Generator" id="9I0-eo-Si2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WE6-LU-qTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -125,7 +125,7 @@
                             <constraint firstItem="k6P-cd-BZp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="XME-Wl-kc0"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Node" id="ByL-dP-yfI"/>
+                    <tabBarItem key="tabBarItem" title="Project Nodes" id="ByL-dP-yfI"/>
                     <connections>
                         <outlet property="addButton" destination="7dK-RQ-XWR" id="uQF-PU-oRd"/>
                         <outlet property="navBar" destination="k6P-cd-BZp" id="D25-qB-LNb"/>
