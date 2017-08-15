@@ -15,14 +15,13 @@ class BaseCell : UICollectionViewCell{
     override init(frame: CGRect){
         super.init(frame: frame)
         setupViews()
-        
+
     }
     
     func setupViews(){
     
     }
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init coder has not been implemented")
     }
@@ -35,7 +34,7 @@ class ProjectCell: BaseCell{
         didSet{
             nameLabel.text = nodeProject?.projectName
             tagView.backgroundColor = nodeProject?.chosenTag
-            //will change project preview, collaborators, tag
+            //Change project preview, collaborators, tag
             
         }
     }
@@ -44,17 +43,15 @@ class ProjectCell: BaseCell{
     //NAME OF PROJECT
     let nameLabel: UILabel = {
         let labelView = UILabel()
-        //labelView.backgroundColor = UIColor.green
         labelView.translatesAutoresizingMaskIntoConstraints = false
-        
         labelView.text = ""
+        
         return labelView
     }()
     
     //GET CURRENT DATE
     let dateLabel: UILabel = {
         let dateView = UILabel()
-        // dateView.backgroundColor = UIColor.purple
         dateView.translatesAutoresizingMaskIntoConstraints = false
         let date = Date()
         let calendar = Calendar.current
@@ -65,21 +62,11 @@ class ProjectCell: BaseCell{
         
         dateView.text = "\(month)/\(day)/\(year)"
         dateView.textAlignment = NSTextAlignment.right
+        
         return dateView
     }()
     
     //GET PROJECT PREVIEW, SNAPSHOTS
-    /*let projectPreview: UIImageView = {
-        let preview = UIImageView()
-        // preview.backgroundColor = UIColor.red
-        preview.translatesAutoresizingMaskIntoConstraints = false
-        //get image
-        preview.image = UIImage(named: "projectNodeLogo")
-        preview.contentMode = .scaleAspectFill
-        preview.clipsToBounds = true
-
-        return preview
-    }()*/
     
    /* let projectPreview: UIButton = {
         let preview = UIButton()
@@ -100,8 +87,9 @@ class ProjectCell: BaseCell{
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     //UPDATE COLLABORATOR COUNT BASED ON ADDED PEOPLE
-    let memberLabel : UILabel = {
+   /* let memberLabel : UILabel = {
         let memberView = UILabel()
         // memberView.backgroundColor = UIColor.yellow
         memberView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +97,8 @@ class ProjectCell: BaseCell{
         memberView.text = "Collaborators: 0"
         memberView.textColor = UIColor.black
         return memberView
-    }()
+    }()*/
+    
     //SORT BY TAGS
     let tagView : UIImageView = {
         let tagV = UIImageView()
@@ -137,7 +126,7 @@ class ProjectCell: BaseCell{
         addSubview(separatorView)
         addSubview(nameLabel)
         addSubview(dateLabel)
-        addSubview(memberLabel)
+        //addSubview(memberLabel)
         addSubview(tagView)
         
         addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: projectPreview)
@@ -145,7 +134,7 @@ class ProjectCell: BaseCell{
         addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
         
         //memberLabel
-        
+        /*
         //top constraint
         addConstraint(NSLayoutConstraint(item: memberLabel, attribute: .top, relatedBy: .equal, toItem: projectPreview, attribute: .top, multiplier: 1, constant: 0))
         //right constraint
@@ -156,7 +145,7 @@ class ProjectCell: BaseCell{
         
         //height constraint
         addConstraint(NSLayoutConstraint(item: memberLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 15))
-        
+        */
         //tagView
         
         addConstraint(NSLayoutConstraint(item: tagView, attribute: .top, relatedBy: .equal, toItem: projectPreview, attribute: .top, multiplier: 1, constant: 0))

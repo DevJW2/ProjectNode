@@ -2,7 +2,7 @@
 //  LoadingOverlay.swift
 //  app
 //
-//  Created by Igor de Oliveira Sa on 25/03/15, Used by Jeffrey Weng.
+//  Created by Igor de Oliveira Sa on 25/03/15, Modified by Jeffrey Weng.
 //  Copyright (c) 2015 Igor de Oliveira Sa. All rights reserved.
 //
 //  Usage:
@@ -17,7 +17,6 @@
 import UIKit
 import Foundation
 
-
 public class LoadingOverlay{
     
     var overlayView = UIView()
@@ -30,7 +29,6 @@ public class LoadingOverlay{
         }
         return Static.instance
     }
-    
     
     public func showOverlay(view: UIView!) {
         

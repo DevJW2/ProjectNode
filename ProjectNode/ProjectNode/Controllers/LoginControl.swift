@@ -20,8 +20,6 @@ class LoginControl : UIViewController{
     @IBOutlet weak var forgetPassword: UIButton!
     @IBOutlet weak var forgetPasswordBottomConstraint: NSLayoutConstraint!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -41,8 +39,6 @@ class LoginControl : UIViewController{
         // Dispose of any resources that can be recreated.
     }
 
-    
-    
     func keyboardWillShow(notification: NSNotification){
         if let info = notification.userInfo{
             let rect: CGRect = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
@@ -54,9 +50,8 @@ class LoginControl : UIViewController{
                 self.view.layoutIfNeeded()
                 self.forgetPasswordBottomConstraint.constant = rect.height + 20
             
-            })
+                })
             }
-        
         }
     }
     
@@ -70,7 +65,6 @@ class LoginControl : UIViewController{
                 self.view.layoutIfNeeded()
                 self.forgetPasswordBottomConstraint.constant = 20
             })
-        
         }
     }
 
@@ -84,7 +78,7 @@ class LoginControl : UIViewController{
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if let user = user{
                     //user is found, go to new screen
-                    LoadingOverlay.shared.showOverlay(view: self.view)
+                    LoadingOverlay.shared.showOverlay(view: self.view) // Animation
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "mainPage")
                     self.present(vc, animated: true, completion: nil)
@@ -99,8 +93,6 @@ class LoginControl : UIViewController{
 
                 }
             }
-            
         }
     }
-
 }

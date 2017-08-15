@@ -16,9 +16,9 @@
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="VfQ-YO-p4g" customClass="LoginPageController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="Qd1-2B-q7v" kind="show" id="lpY-6p-4Rx"/>
-                        <segue destination="Az6-8x-h66" kind="show" id="3ST-zk-yrY"/>
-                        <segue destination="uRh-l4-rbY" kind="show" id="ewF-90-A6o"/>
+                        <segue destination="Qd1-2B-q7v" kind="show" identifier="pageOne" id="lpY-6p-4Rx"/>
+                        <segue destination="Az6-8x-h66" kind="show" identifier="pageThree" id="3ST-zk-yrY"/>
+                        <segue destination="uRh-l4-rbY" kind="show" identifier="pageTwo" id="ewF-90-A6o"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ap-XB-39j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -40,7 +40,7 @@
                             <containerView opaque="NO" tag="-10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cB0-et-cm3">
                                 <rect key="frame" x="0.0" y="75" width="375" height="505"/>
                                 <connections>
-                                    <segue destination="VfQ-YO-p4g" kind="embed" id="8P5-Jj-HhG"/>
+                                    <segue destination="VfQ-YO-p4g" kind="embed" identifier="showLoginPages" id="8P5-Jj-HhG"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXn-5i-C9g">
@@ -54,7 +54,7 @@
                                 </state>
                                 <connections>
                                     <action selector="signupButtonTapped:" destination="YXK-4j-Iwk" eventType="touchUpInside" id="4PA-uc-Gqc"/>
-                                    <segue destination="WEc-zz-Ygq" kind="show" id="h9Y-hy-0BN"/>
+                                    <segue destination="WEc-zz-Ygq" kind="show" identifier="goSignIn" id="h9Y-hy-0BN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibb-6d-n4V">
@@ -69,7 +69,7 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="YXK-4j-Iwk" eventType="touchUpInside" id="8k8-Gj-A4k"/>
-                                    <segue destination="06m-Tp-WSV" kind="show" id="8lV-cg-yHv"/>
+                                    <segue destination="06m-Tp-WSV" kind="show" identifier="goLogin" id="8lV-cg-yHv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -157,7 +157,7 @@
                                     <navigationItem title="Log In" id="6Q9-iD-slU">
                                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Pw2-Sw-gE6">
                                             <connections>
-                                                <segue destination="QXh-VW-61f" kind="unwind" unwindAction="unwindToLoginViewControllerWithSegue:" id="gzO-ti-eJT"/>
+                                                <segue destination="QXh-VW-61f" kind="unwind" identifier="unwindLogin" unwindAction="unwindToLoginViewControllerWithSegue:" id="gzO-ti-eJT"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -342,7 +342,7 @@
                                     <navigationItem title="Sign Up" id="3NL-Cx-MN5">
                                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="cYQ-8m-CYq">
                                             <connections>
-                                                <segue destination="Ych-Rh-z6b" kind="unwind" unwindAction="unwindToLoginViewControllerWithSegue:" id="6Yh-OG-91Z"/>
+                                                <segue destination="Ych-Rh-z6b" kind="unwind" identifier="unwindSign" unwindAction="unwindToLoginViewControllerWithSegue:" id="6Yh-OG-91Z"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -381,7 +381,7 @@
         <!--Page Three View Controller-->
         <scene sceneID="wSz-M9-Jde">
             <objects>
-                <viewController storyboardIdentifier="greenViewController" id="Az6-8x-h66" customClass="PageThreeViewController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageThreeViewController" id="Az6-8x-h66" customClass="PageThreeViewController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HAP-aj-3Kt"/>
                         <viewControllerLayoutGuide type="bottom" id="IBG-BP-ThS"/>
@@ -405,7 +405,7 @@
         <!--Page One View Controller-->
         <scene sceneID="7zd-hU-aKO">
             <objects>
-                <viewController storyboardIdentifier="redViewController" id="Qd1-2B-q7v" customClass="PageOneViewController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageOneViewController" id="Qd1-2B-q7v" customClass="PageOneViewController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d1K-tc-2cK"/>
                         <viewControllerLayoutGuide type="bottom" id="iJZ-WX-BwF"/>
@@ -429,7 +429,7 @@
         <!--Page Two View Controller-->
         <scene sceneID="UEk-yt-NSi">
             <objects>
-                <viewController storyboardIdentifier="blueViewController" id="uRh-l4-rbY" customClass="PageTwoViewController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageTwoViewController" id="uRh-l4-rbY" customClass="PageTwoViewController" customModule="ProjectNode" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nKl-MN-Dzz"/>
                         <viewControllerLayoutGuide type="bottom" id="yoi-nz-dTM"/>

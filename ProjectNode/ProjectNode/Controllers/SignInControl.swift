@@ -21,11 +21,10 @@ class SignInControl : UIViewController{
     @IBOutlet weak var signinNavBar: UINavigationBar!
     
     var ref: DatabaseReference?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        //signinNavBar.layer.borderColor = UIColor.white.cgColor
         signinButton.layer.cornerRadius = 12
         ref = Database.database().reference()
     }
@@ -47,15 +46,13 @@ class SignInControl : UIViewController{
     func isValidEmail(testStr:String) -> Bool {
         // print("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        
         return emailTest.evaluate(with: testStr)
     }
     
     func isValidPassword(pass: String) -> Bool{
         if (pass.trimmingCharacters(in: .whitespaces).isEmpty) || pass.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "").characters.count < 7{
-            //print(pass.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: ""))
-            //print(pass.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "").characters.count)
             return false
         }
         return true
@@ -65,8 +62,7 @@ class SignInControl : UIViewController{
 
     @IBAction func signinButtonTapped(_ sender: Any) {
         self.signinButton.isEnabled = false
-        //put name and user in database
-        //email verification
+        //Put Name in Database
         var correctName : Bool = false
         if let name = nameTextField.text{
             if !(name.trimmingCharacters(in: .whitespaces).isEmpty){
@@ -81,7 +77,7 @@ class SignInControl : UIViewController{
                         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                             if let user = user{
                                 //user is found, go to new screen
-                                LoadingOverlay.shared.showOverlay(view: self.view)
+                                LoadingOverlay.shared.showOverlay(view: self.view) //Animation
                                 self.ref?.child("users").child(user.uid).setValue(["name": (self.nameTextField.text?.trimmingCharacters(in: .whitespaces))! + " " + (self.lastNameTextField.text?.trimmingCharacters(in: .whitespaces))!])
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                                     LoadingOverlay.shared.hideOverlayView()

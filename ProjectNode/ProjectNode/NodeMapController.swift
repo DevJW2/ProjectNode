@@ -16,7 +16,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     @IBOutlet weak var editNode: UIButton!
     @IBOutlet weak var deleteNode: UIButton!
     @IBOutlet weak var backHub: UIButton!
-    var nodeList : [Node] = [] //Has to be dictionary, each key contains an array of values[amount of nodes]
+    
+    var nodeList : [Node] = []
     var buttonCenter = CGPoint.zero
     var newNode : Node?
     var nodeSize : Double = 50.0
@@ -24,6 +25,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     let pinchRec = UIPinchGestureRecognizer()
     let panRec = UIPanGestureRecognizer()
     let rotateRec = UIRotationGestureRecognizer()
+    
+    //let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
     
     let canvas = UIView(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     let zoomMaxWidth : CGFloat = UIScreen.main.bounds.width * 3.0
@@ -33,26 +36,22 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //canvas.backgroundColor = UIColor.green
         self.view.addSubview(canvas)
         self.view.insertSubview(canvas, at: 0)
         
-        print("first node")
-        let ancestorNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "Hello", _descript: "", _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
-        print("Node: \(ancestorNode)")
-        print("append first node to list")
+        let ancestorNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "Hello", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
+
         nodeList.append(ancestorNode)
-        print("nodeList : \(nodeList)")
-        print("add node to subview")
         canvas.addSubview(ancestorNode.getNode())
-        print("node Object: \(ancestorNode.getNode())")
-        print("received notification from node object for pan")
+
         NotificationCenter.default.addObserver(self, selector: #selector(nodeSelected), name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
         
         nodeCreator.isHidden = true
         editNode.isHidden = true
         deleteNode.isHidden = true
+        
+        //Moving the views around: Pinching, Panning, and Rotating
         
         pinchRec.addTarget(self, action: #selector(pinchedView))
         canvas.addGestureRecognizer(pinchRec)
@@ -68,13 +67,14 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         self.view.addGestureRecognizer(panRec)
         self.view.isUserInteractionEnabled = true
     
-        
         rotateRec.addTarget(self, action: #selector(rotatedView))
         canvas.addGestureRecognizer(rotateRec)
         canvas.isUserInteractionEnabled = true
         
         self.view.addGestureRecognizer(rotateRec)
         self.view.isUserInteractionEnabled = true
+        
+        //self.view.addGestureRecognizer(longPressRecognizer)
         
         
     
@@ -103,7 +103,6 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             }
         }
         
-        //self.view!.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         //updateNodeSize(transformScale: sender.scale)
         sender.scale = 1.0
     }
@@ -123,29 +122,22 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     }
     
     @IBAction func nodeCreatorTapped(_ sender: Any) {
-        print("start node creator tapped")
-        if selectedNode!.getLimit() < 3{
-            print("selected node is less than 3: \(selectedNode!.getLimit())")
-            print("selected node: \(selectedNode!)")
-            print("creating new node....")
-            newNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "", _descript: "")
-            print("new node: \(newNode!)")
+
+        if selectedNode!.getChildren() < selectedNode!.getNodeLimit(){
+
+            newNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "", _descript: "", _nodeLimit: 3)
+
             nodeList.append(newNode!)
-            print("append A NODE to list")
-            print("node list: \(nodeList)")
+ 
             canvas.addSubview(newNode!.getNode())
-            selectedNode!.nodeLimit += 1
-            print("set the new node's connected node to the selected node")
+            selectedNode!.childNodes += 1
+
             newNode?.setConnectedNode(item: selectedNode!)
-            print("connected Node: \(newNode!.getConnectedNode())")
-            print("connected node should be equal to selected node")
-            print("create connection between selected node and the new node created")
-            print("selectedNode: \(selectedNode!) and newNode: \(newNode!)")
+            
             //createNodeConnection(selectNode: selectedNode!, createdNode: newNode!)
             canvas.insertSubview(newNode!.getNode(), belowSubview: nodeCreator)
             createNodeConnection(selectNode: newNode!, createdNode: selectedNode!)
  
-            print("end node creator tapped")
         }
         else{
             print("can't print any more nodes")
@@ -156,47 +148,56 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     @IBAction func editNodeTapped(_ sender: Any) {
         performSegue(withIdentifier: "nodeEdit", sender: nil)
     }
-    
+    //Removing Nodes
     @IBAction func deleteNodeTapped(_ sender: Any) {
-
+        removeNodes(node: selectedNode!)
+        nodeCreator.isHidden = true
+        editNode.isHidden = true
+        deleteNode.isHidden = true
+        //selectedNode!.connectedNode.
+        
+        //print(nodeList)
     }
+    
+    func removeNodes(node: Node){
+        //lessen the limit
+        node.getNode().removeFromSuperview()
+        node.removeConnector()
+        nodeList.remove(at: nodeList.index(of: node)!)
+        for item in nodeList{
+            if item.connectedNode == node{
+                removeNodes(node: item)
+            }
+        }
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if let nodeEditor = segue.destination as? NodeEditorController{
             nodeEditor.delegate = self
         }
     }
     
-//OBTAINING DATA HERE
+//OBTAINING DATA HERE, FROM DELEGATE
     func nodeProperties(name: String, color: UIColor, size: Double) {
         print(name)
     }
     
+    //When node is selected
     func nodeSelected(){
         nodeCreator.isHidden = false
         editNode.isHidden = false
         deleteNode.isHidden = false
-        panRec.isEnabled = false
-        print("node is selected, nodeSelected function in nodeMap is called")
+
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panNode))
         selectedNode!.getNode().addGestureRecognizer(pan)
-        print("setting pan to node")
-        print("selectedNode: \(selectedNode!)")
-        
         
     }
-    
-   /* func updateNodes(){
-        for item in 1..<nodeList.count{
-            nodeList[item].removeConnector()
-            createNodeConnection(selectNode: nodeList[item], createdNode: nodeList[item].getConnectedNode()!)
-        }
-    }*/
     
     //UPDATING PANNING/ROTATING/ZOOMING
     //Zooming - Changes Node Size, line width, line distance, all relative
     //panning - change x and y positions
     //rotating - change x and y positions
-    
     
     func updateNodeConnections(){
         for item in nodeList{
@@ -219,56 +220,15 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     
     }
     
-    /*func updateNodeSize(transformScale: CGFloat){
-        for item in nodeList{
-            item.getNode().transform = item.getNode().transform.scaledBy(x: transformScale, y: transformScale)
-            if transformScale < 1.0{
-                updateNodePositions(transformValueX: -1.0, transformValueY: -1.0)
-            }
-            else{
-                updateNodePositions(transformValueX: 1.0, transformValueY: 1.0)
-            }
-            nodeSize = Double(item.getNode().frame.size.width)
-            item.updateSize(value: nodeSize)
-            
-            
+    func panNode(pan: UIPanGestureRecognizer){
+        let location = pan.location(in: canvas) // get pan location
+        if let selectedNode = selectedNode{
+            selectedNode.getNode().center = location // set button to where finger is
+            selectedNode.removeConnector()
+        //selectedNode!.getConnectedNode().removeConnector()
         }
         updateNodeConnections()
-    }*/
-
-    func panNode(pan: UIPanGestureRecognizer){
-        if pan.state == .began {
-            print("pan state begin")
-            buttonCenter = selectedNode!.getNode().center // store old button center
-        } else if pan.state == .ended || pan.state == .failed || pan.state == .cancelled {
-            print("pan state end")
-            //selectedNode!.getNode().center = buttonCenter // restore button center
-            
-        } else {
-            print("pan state still moving")
-            let location = pan.location(in: canvas) // get pan location
-            selectedNode!.getNode().center = location // set button to where finger is
-            print("selectedNode that is moving: \(selectedNode!)")
-            
-            /*
-            selectedNode?.removePath()
-            selectedNode?.connectedNode?.removePath()
-             */
-            print("removing the connector lines")
-            print("removing connector lines from selectedNode! ")
-            print("selectedNode: \(selectedNode!)")
-            selectedNode?.removeConnector()
-            print("removing the connector lines from the parent connected node lines")
-            print("parent node of the selected node: \(selectedNode!.getConnectedNode())")
-            //selectedNode!.getConnectedNode().removeConnector()
-            
-            print("create new connection between selectedNode and selectedNode and connected Node")
-            //createNodeConnection(selectNode: selectedNode!, createdNode: selectedNode!.getConnectedNode())
-            //createNodeConnection(selectNode: selectedNode!.getConnectedNode(), createdNode: selectedNode!)
-            print("selectedNode: \(selectedNode!) and parent\(selectedNode!.getConnectedNode())")
-            updateNodeConnections()
-        
-        }
+    
     }
     
     
@@ -279,105 +239,34 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         let path = UIBezierPath()
         path.move(to: selectedNodeOrigin)
         path.addLine(to: createdNodeOrigin)
-        //selectedNode.addPath(path: path)
-        //print(path)
-        
+        selectNode.addPaths(item: path)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.strokeColor = UIColor.white.cgColor
         shapeLayer.lineWidth = 1.0
-        //CGFloat(nodeSize/30.0) 30 is base circle size
-        
         
         canvas.layer.addSublayer(shapeLayer)
-        print("adding connector, the line, to selectedNode")
-        print("selectedNode: \(selectNode)")
-        print("createdNode: \(createdNode)")
-        print("shapeLayer: \(shapeLayer)")
         selectNode.addConnector(line: shapeLayer)
-        //self.view.layer.insertSublayer(shapeLayer, below: selectedNode.getNode().layer)
         canvas.layer.insertSublayer(shapeLayer, at: 0)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        
         if let touch = touches.first{
             if touch.view == canvas || touch.view == self.view{
+                //set Previous selected Node to its original color
                 if selectedNode != nil{
                     selectedNode!.getNode().backgroundColor = selectedNode!.color
+                    selectedNode!.getNode().layer.borderColor = selectedNode!.borderColor.cgColor
                 }
                 selectedNode = nil
                 nodeCreator.isHidden = true
                 editNode.isHidden = true
                 deleteNode.isHidden = true
-                panRec.isEnabled = true
             }
             else{
                 return
             }
         }
     }
-    
-
-    
-    
-
-    
-    
-
 
 }
-/* PREVIOUS CODE
- 
-//DO NOT USE CGRECT COMPARATORS
-
-func addNode(){
-    //var newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
-    var flag = false
-    if nodeList.count == 0{
-        let newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
-        nodeList.append(newNode)
-        self.view.addSubview(newNode.nodeObj())
-        print("FIRST NODE CREATED")
-    }
-    else{
-        while flag == false{
-            let newNode = Node(_distance: 20, _color: UIColor.blue, _size: 20, _name: "Hello World")
-            for index in 0..<nodeList.count{
-                print("Index: ")
-                print(index)
-                print("Node List: ")
-                print(nodeList)
-                print("first Node frame: ")
-                print(nodeList[0].nodeObj().frame)
-                print("New node created: ")
-                print(newNode.nodeObj().frame)
-                print("equal or not")
-                print(newNode.nodeObj() == nodeList[index].nodeObj())
-                print("node list length")
-                print(nodeList.count - 1)
-                if (newNode.nodeObj().frame != nodeList[index].nodeObj().frame) && (index == nodeList.count - 1){
-                    print("ENTERED IF STATEMENT")
-                    print("New Node Rect: ")
-                    print(newNode.nodeObj().frame)
-                    print("Existing Node Rect: ")
-                    print(nodeList[index].nodeObj().frame)
-                    
-                    nodeList.append(newNode)
-                    print("NEW NODE CREATED")
-                    self.view.addSubview(newNode.nodeObj())
-                    flag = true
-                    break
-                }
-                else if newNode.nodeObj().frame.equalTo(nodeList[index].nodeObj().frame){
-                    print("NODE IS EQUAL")
-                    break
-                }
-            }
-            print("exiting for loop......")
-            
-        }
-    }
-}
-*/

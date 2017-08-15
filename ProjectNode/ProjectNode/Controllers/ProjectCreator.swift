@@ -11,9 +11,9 @@ protocol ProjectCreatorDelegate : class{
     func formCompleted(nameProject : String?, tag : Int?)
 }
 
-
 import Foundation
 import UIKit
+
 class ProjectCreator : UIViewController, UITextFieldDelegate{
     
     weak var delegate: ProjectCreatorDelegate?
@@ -22,15 +22,14 @@ class ProjectCreator : UIViewController, UITextFieldDelegate{
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var creatorView: UIView!
     @IBOutlet weak var tagSelection: UISegmentedControl!
-    
     @IBOutlet weak var exitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         creatorView.layer.cornerRadius = 12
         doneButton.layer.cornerRadius = 14
         nameTextField.delegate = self
-        
     }
 
     @IBAction func doneButtonTapped(_ sender: Any) {
@@ -39,8 +38,8 @@ class ProjectCreator : UIViewController, UITextFieldDelegate{
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
 
-        }else{
-            
+        }
+        else{
             delegate?.formCompleted(nameProject: nameTextField.text, tag: tagSelection.selectedSegmentIndex)
             dismiss(animated: true, completion:nil)
         }
@@ -50,6 +49,8 @@ class ProjectCreator : UIViewController, UITextFieldDelegate{
           dismiss(animated: true, completion:nil)
     }
     
+    //Dismissing the Keyboard
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -58,10 +59,5 @@ class ProjectCreator : UIViewController, UITextFieldDelegate{
         self.view.endEditing(true)
         return false
     }
-
-    
-    
-
-
 
 }

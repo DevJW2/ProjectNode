@@ -11,11 +11,11 @@ import UIKit
 
 
 class LoginPageController : UIPageViewController{
-    //for dots
+    //FOR DOT UI
     var pageControl = UIPageControl()
     
     override func viewWillLayoutSubviews() {
-        //for dots
+        //FOR DOT UI
         self.delegate = self
         configurePageControl()
     }
@@ -40,9 +40,9 @@ class LoginPageController : UIPageViewController{
     }
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newMainViewController(value: "red"),
-                self.newMainViewController(value: "green"),
-                (self.newMainViewController(value: "blue"))]
+        return [self.newMainViewController(value: "pageOne"),
+                self.newMainViewController(value: "pageTwo"),
+                (self.newMainViewController(value: "pageThree"))]
     }()
     
     private func newMainViewController(value: String) -> UIViewController {
@@ -51,7 +51,7 @@ class LoginPageController : UIPageViewController{
     }
     
     
-    //for dots
+    //FOR DOT UI
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
         pageControl = UIPageControl(frame: CGRect(x: 0,y: self.view.bounds.height - 50,width: self.view.bounds.width,height: 50))

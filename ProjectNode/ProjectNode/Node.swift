@@ -10,47 +10,51 @@ import Foundation
 import UIKit
 
 class Node : NSObject{
-    //properties
+    
+    //Node Properties
     var distance: Double
     var color: UIColor
+    var borderColor: UIColor = UIColor.white
+    var previousBorderColor: UIColor?
     var size: Double
     var name: String
-    var nodeLimit: Int = 0
-    
+    var childNodes: Int = 0
+    var nodeLimit: Int
     var descript: String
-    
     var node: UIButton?
     var connector: CAShapeLayer?
-    
-    //var pathConnector: UIBezierPath?
+    var path: UIBezierPath?
     var connectedNode : Node?
     
-    //for the creation of the first node 
-    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _descript: String, _xCoordinate : Double, _yCoordinate: Double){
+    //Creation of First Node
+    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _descript: String, _nodeLimit: Int, _xCoordinate : Double, _yCoordinate: Double){
+        
         distance = _distance
         color = _color
         size = _size
         name = _name
         descript = _descript
-        
+        nodeLimit = _nodeLimit
+
         node = UIButton(frame: CGRect(x: _xCoordinate - size/2, y: _yCoordinate - size/2, width: size, height: size))
-        
         
         //More Node properties
         node!.layer.cornerRadius = CGFloat(size/2.0)
+        node!.layer.borderWidth = 1
+        node!.layer.borderColor = UIColor.white.cgColor
         node!.layer.backgroundColor = color.cgColor
         node!.setTitle(name, for: UIControlState.normal)
         node!.titleLabel?.font = UIFont(name: "Times New Roman", size: 18)
-
     }
     
-    
-    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _descript: String){
+    //Creation of every other Node
+    init(_distance: Double, _color: UIColor, _size: Double, _name: String, _descript: String, _nodeLimit: Int){
         distance = _distance
         color = _color
         size = _size
         name = _name
         descript = _descript
+        nodeLimit = _nodeLimit
         
         //generate angles
         let randomAngle = Double(arc4random_uniform(361))
@@ -61,27 +65,22 @@ class Node : NSObject{
         
         node = UIButton(frame: CGRect(x: xCoordinate, y: yCoordinate, width: size, height: size))
         
-        
         //More Node properties
         node!.layer.cornerRadius = CGFloat(size/2.0)
+        node!.layer.borderWidth = 1
+        node!.layer.borderColor = UIColor.white.cgColor
         node!.layer.backgroundColor = color.cgColor
         node!.setTitle(name, for: UIControlState.normal)
         node!.titleLabel?.font = UIFont(name: "Times New Roman", size: 18)
         
-        
     }
     
-    func updateSize(value: Double){
-        size = value
-    }
-    
-    
+    //Data about the parent node of each node
     func setConnectedNode(item: Node){
         connectedNode = item
     }
+    
     func getConnectedNode() -> Node?{
-        print("getting the connected node....in Node class")
-        //print("connected Node: \(connectedNode!)" )
         if connectedNode == nil{
             return nil
         }
@@ -90,54 +89,90 @@ class Node : NSObject{
         }
     }
     
+    //Data about the line connector
     func addConnector(line : CAShapeLayer){
-        print("ADDING CONNECTORS")
-        print("connector: \(line)")
         connector = line
     }
+    
     func removeConnector(){
-        print("removing connectors, the lines......")
         if let legitConnector = connector {
-            print("There is a connector.")
-            print("connector: \(connector!)")
             connector!.removeFromSuperlayer()
             
-        } else {
-            print("NOPE. There is no connector.")
         }
+    }
+    
+    //Data about the paths
+    func addPaths(item: UIBezierPath){
+        path = item
+    }
+    func removePath(){
+        if let legitPath = path{
+            path!.removeAllPoints()
+        }
+    }
+    
+    //Properties of a node that can be edited
+    
+    func getSize() -> Double{
+        return size
     }
     
     func setDescription(text: String){
         descript = text
     }
     
-    /*
-    func addPath(path : UIBezierPath){
-        pathConnector = path
+    func setName(text: String){
+        name = text
     }
-    func removePath(){
-        pathConnector?.close()
-    }*/
+    func getName() -> String{
+        return name
+    }
     
-    func getLimit() -> Int{
+    func setColor(value: UIColor){
+        color = value
+    }
+    
+    func setBorderColor(value : UIColor){
+        borderColor = value
+    }
+    func setPreviousBorderColor(value : UIColor){
+        previousBorderColor = value
+    }
+    
+    func setNodeLimit(value: Int){
+        nodeLimit = value
+    }
+    
+    func getNodeLimit() -> Int{
         return nodeLimit
     }
     
     
+    
+    //Limit of how many nodes can be connected to a parent node
+    func getChildren() -> Int{
+        return childNodes
+    }
+    
+    //Sets up target action and returns the UIButton Object
     func getNode() -> UIButton{
-        
         node!.addTarget(self, action: #selector(nodeSelection), for: .touchUpInside)
         return node!
     }
+    
     //Selects current node and highlights it for editing/movement/adding
     func nodeSelection(){
-        //make color the standard, and have the highlighted node preset a color later....because users can change colors
+        //set Previous selected Node to its original color
         if selectedNode != nil{
-            selectedNode?.getNode().backgroundColor = color
-        }
-        selectedNode = self
-        selectedNode!.getNode().backgroundColor = UIColor.red
+            selectedNode!.getNode().backgroundColor = selectedNode!.color
+            selectedNode!.getNode().layer.borderColor = selectedNode!.borderColor.cgColor
         
+        }
+
+        //Set selectedNode to selected node, set color to red
+        selectedNode = self
+        //selectedNode!.getNode().backgroundColor = UIColor.red
+        selectedNode!.getNode().layer.borderColor = UIColor.red.cgColor
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
     }
     
@@ -145,38 +180,3 @@ class Node : NSObject{
 
 
 }
-
-
-/*   Previous Code
- 
-     var locationX : CGFloat?
-     var locationY : CGFloat?
-     
-     let randomLocation = Int(arc4random_uniform(3))
-     
-     let rectSize = CGSize(width: distance * 2, height: distance * 2)
-     //later on the center point will be the selected node
-     let centerPoint = CGPoint(x : Int(UIScreen.main.bounds.width/2) - Int(rectSize.width/2),y : Int(UIScreen.main.bounds.height/2) - Int(rectSize.height/2))
-     
-     let tempRect = CGRect(origin: centerPoint, size: rectSize)
-     //var allLocation : [CGPoint] = [CGPoint(x: tempRect.maxX, y: tempRect.maxY), CGPoint(x: tempRect.minX - size, y:tempRect.max), CGPoint(x: tempRect.midX - size/2, y:tempRect.minY - size)]
-     
-     if randomLocation == 0{
-         locationX = tempRect.maxX
-         locationY = tempRect.maxY
-     }
-     else if randomLocation == 1{
-         locationX = tempRect.minX - size
-         locationY = tempRect.maxY
-     }
-     else if randomLocation == 2{
-         locationX = tempRect.midX - size/2
-         locationY = tempRect.minY - size
-     }
- */
-
-
-
-
-
-
