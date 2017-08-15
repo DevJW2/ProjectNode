@@ -26,6 +26,7 @@ class NodeEditorController : UIViewController, UITextFieldDelegate{
     @IBOutlet weak var nodeLimitValue: UILabel!
     @IBOutlet weak var nodeLimitSliderObj: UISlider!
 
+    @IBOutlet weak var copyParentNode: UIButton!
     @IBOutlet weak var textColorSegment: UISegmentedControl!
 
     @IBOutlet weak var borderColorSegment: UISegmentedControl!
@@ -46,6 +47,7 @@ class NodeEditorController : UIViewController, UITextFieldDelegate{
         view.addSubview(neatColorPicker)
         
         nameTextField.delegate = self
+        
         
         //set values of the nodeEditor into the node
         nameTextField.text = selectedNode!.getName()
@@ -74,6 +76,10 @@ class NodeEditorController : UIViewController, UITextFieldDelegate{
         }
             
         nodeDescription.text = selectedNode!.descript
+        //For copying... not allowed in Ancestor node
+        if selectedNode!.getNode().tag == -99{
+            copyParentNode.isHidden = true
+        }
 
         
     }
@@ -106,6 +112,33 @@ class NodeEditorController : UIViewController, UITextFieldDelegate{
         nodeLimitValue.text = String(Int(sender.value))
     }
 
+ 
+    @IBAction func copyParentTapped(_ sender: Any) {
+        //shape, name, textcolor border color
+         nameTextField.text = selectedNode!.connectedNode?.getName()
+         neatColorPicker.adjustToColor((selectedNode!.connectedNode?.getNode().backgroundColor!)!)
+        if selectedNode!.connectedNode?.previousBorderColor == UIColor.black{
+            borderColorSegment.selectedSegmentIndex = 0
+        }
+        else if selectedNode!.connectedNode?.previousBorderColor == UIColor.white{
+            borderColorSegment.selectedSegmentIndex = 1
+        }
+        
+        if selectedNode!.connectedNode?.getNode().titleLabel?.textColor == UIColor.black{
+            textColorSegment.selectedSegmentIndex = 0
+        }
+        else if selectedNode!.connectedNode?.getNode().titleLabel?.textColor == UIColor.white{
+            textColorSegment.selectedSegmentIndex = 1
+        }
+        
+        if selectedNode!.connectedNode?.getNode().layer.cornerRadius == 0{
+            shapeControl.selectedSegmentIndex = 1
+        }
+        else{
+            shapeControl.selectedSegmentIndex = 0
+        }
+        
+    }
 
     
     

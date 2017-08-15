@@ -15,7 +15,7 @@ class Node : NSObject{
     var distance: Double
     var color: UIColor
     var borderColor: UIColor = UIColor.white
-    var previousBorderColor: UIColor?
+    var previousBorderColor: UIColor = UIColor.white //Has to be the same as borderColor
     var size: Double
     var name: String
     var childNodes: Int = 0

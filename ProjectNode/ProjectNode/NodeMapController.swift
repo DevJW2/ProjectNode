@@ -40,9 +40,10 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         self.view.addSubview(canvas)
         self.view.insertSubview(canvas, at: 0)
         
-        let ancestorNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "Hello", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
+        let ancestorNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "Hi!", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
 
         nodeList.append(ancestorNode)
+        ancestorNode.getNode().tag = -99
         canvas.addSubview(ancestorNode.getNode())
 
         NotificationCenter.default.addObserver(self, selector: #selector(nodeSelected), name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
@@ -75,7 +76,6 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         self.view.isUserInteractionEnabled = true
         
         //self.view.addGestureRecognizer(longPressRecognizer)
-        
         
     
     }
@@ -128,7 +128,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             newNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "", _descript: "", _nodeLimit: 3)
 
             nodeList.append(newNode!)
- 
+
             canvas.addSubview(newNode!.getNode())
             selectedNode!.childNodes += 1
 
@@ -151,10 +151,12 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     //Removing Nodes
     @IBAction func deleteNodeTapped(_ sender: Any) {
         removeNodes(node: selectedNode!)
+        
         nodeCreator.isHidden = true
         editNode.isHidden = true
         deleteNode.isHidden = true
-        //selectedNode!.connectedNode.
+        
+        selectedNode!.connectedNode?.childNodes -= 1
         
         //print(nodeList)
     }
@@ -185,9 +187,16 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     
     //When node is selected
     func nodeSelected(){
-        nodeCreator.isHidden = false
-        editNode.isHidden = false
-        deleteNode.isHidden = false
+        if selectedNode!.getNode().tag == -99{
+            nodeCreator.isHidden = false
+            editNode.isHidden = false
+        }
+        else{
+            deleteNode.isHidden = false
+            nodeCreator.isHidden = false
+            editNode.isHidden = false
+        }
+        
 
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panNode))
         selectedNode!.getNode().addGestureRecognizer(pan)
