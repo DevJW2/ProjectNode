@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class NodeProject : NSObject{
-    var projectPreview : String?
+    var projectPreviewImage : UIImage?
     var projectName : String?
     var projectDate : String?
     var collaboratorCount : Int?

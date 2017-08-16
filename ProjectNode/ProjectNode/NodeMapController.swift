@@ -17,10 +17,16 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     @IBOutlet weak var deleteNode: UIButton!
     @IBOutlet weak var backHub: UIButton!
     
+    
     var nodeList : [Node] = []
     var buttonCenter = CGPoint.zero
     var newNode : Node?
     var nodeSize : Double = 50.0
+    
+    var totalTransformX: CGFloat = 0
+    var totalTransformY: CGFloat = 0
+    
+    let nodeColor = UIColor(red: 153/255, green: 204/255, blue: 255/255, alpha: 1)
     
     let pinchRec = UIPinchGestureRecognizer()
     let panRec = UIPanGestureRecognizer()
@@ -40,11 +46,12 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         self.view.addSubview(canvas)
         self.view.insertSubview(canvas, at: 0)
         
-        let ancestorNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "Hi!", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
+        let ancestorNode = Node(_distance: 100, _color: nodeColor, _size: nodeSize, _name: "Hi!", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))
 
         nodeList.append(ancestorNode)
         ancestorNode.getNode().tag = -99
         canvas.addSubview(ancestorNode.getNode())
+        //canvas.backgroundColor = UIColor.green
 
         NotificationCenter.default.addObserver(self, selector: #selector(nodeSelected), name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
         
@@ -83,8 +90,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         return UIInterfaceOrientationMask(rawValue: UInt(Int(UIInterfaceOrientationMask.portrait.rawValue)))
     }
     @IBAction func backHubTapped(_ sender: Any) {
+        updateForm(projectPreviewImage: takeScreenShotImage())
         dismiss(animated: true, completion: nil)
-        
     }
     
     func pinchedView(sender: UIPinchGestureRecognizer){
@@ -107,6 +114,12 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         sender.scale = 1.0
     }
     
+    func updateForm(projectPreviewImage: UIImage?){
+        for item in nodeProjects{
+            item.projectPreviewImage = projectPreviewImage
+        }
+    }
+    
     
     func draggedView(sender: UIPanGestureRecognizer){
         let translation = sender.translation(in: canvas)
@@ -125,7 +138,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
 
         if selectedNode!.getChildren() < selectedNode!.getNodeLimit(){
 
-            newNode = Node(_distance: 100, _color: UIColor.blue, _size: nodeSize, _name: "", _descript: "", _nodeLimit: 3)
+            newNode = Node(_distance: 100, _color: nodeColor, _size: nodeSize, _name: "", _descript: "", _nodeLimit: 3)
 
             nodeList.append(newNode!)
 
@@ -157,7 +170,6 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         deleteNode.isHidden = true
         
         selectedNode!.connectedNode?.childNodes -= 1
-        
         //print(nodeList)
     }
     
@@ -171,6 +183,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
                 removeNodes(node: item)
             }
         }
+        
     }
     
     
@@ -190,6 +203,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         if selectedNode!.getNode().tag == -99{
             nodeCreator.isHidden = false
             editNode.isHidden = false
+            deleteNode.isHidden = true
         }
         else{
             deleteNode.isHidden = false
@@ -225,8 +239,21 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             item.getNode().frame.origin.x += transformValueX
             item.getNode().frame.origin.y += transformValueY
         }
+        totalTransformX += transformValueX
+        totalTransformY += transformValueY
         updateNodeConnections()
     
+    }
+    
+    func reverseNodePositions(){
+        for item in nodeList{
+            item.getNode().frame.origin.x -= totalTransformX
+            item.getNode().frame.origin.y -= totalTransformY
+        }
+        updateNodeConnections()
+    
+        totalTransformX = 0
+        totalTransformY = 0
     }
     
     func panNode(pan: UIPanGestureRecognizer){
@@ -236,6 +263,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             selectedNode.removeConnector()
         //selectedNode!.getConnectedNode().removeConnector()
         }
+        
         updateNodeConnections()
     
     }
@@ -277,5 +305,32 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             }
         }
     }
+    
+    func takeScreenShot() -> UIImageView{
+        reverseNodePositions()
+        UIGraphicsBeginImageContext(canvas.frame.size)
+        canvas.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let snapshotImageView = UIImageView(image: snapshotImage)
+        snapshotImageView.frame = CGRect(x: 0,y: 0,width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        return snapshotImageView
+    }
+    
+    func takeScreenShotImage() -> UIImage{
+        reverseNodePositions()
+        UIGraphicsBeginImageContext(canvas.frame.size)
+        canvas.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return snapshotImage!
+    
+    }
+    
+    
+
 
 }

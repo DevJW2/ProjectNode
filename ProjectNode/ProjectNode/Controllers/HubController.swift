@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
+var nodeProjects : [NodeProject] = []
+
 class HubController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,ProjectCreatorDelegate, UISearchBarDelegate{
     
     @IBOutlet weak var projectSearch: UISearchBar!
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
     var collectionView: UICollectionView!
-    var nodeProjects : [NodeProject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,13 +64,22 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        collectionView.reloadData()
+    }
+    
+
+    
+
+    // THIS IS IMPORTANT FOR CHANGING DATA FOR THE HUB PROJECTS
     //Setting names and Tags
     func formCompleted(nameProject : String?, tag: Int?) {
         collectionView.reloadData()
-        
         let node = NodeProject()
+        //Project Name Updated
         node.projectName = nameProject
-        
+        //Tag Selection
         if tag == 0{
             node.chosenTag = UIColor.red
         }
@@ -83,6 +93,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
             node.chosenTag = UIColor.blue
         }
         
+        //Add Projects To Hub
         nodeProjects.append(node)
     }
     
@@ -90,6 +101,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         let storyboard = UIStoryboard(name: "LayoutEditor", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "nodePage")
         self.present(vc, animated: true, completion: nil)
+ 
     }
     
     
@@ -118,6 +130,8 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
     
     @IBAction func addButtonTapped(_ sender: Any) {
     }
+    
+    
 }
 
 

@@ -114,7 +114,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sr4-OM-ZQO">
-                                <rect key="frame" x="124.5" y="587" width="126" height="36"/>
+                                <rect key="frame" x="124.5" y="583" width="126" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="126" id="U6x-3q-KNv"/>
                                     <constraint firstAttribute="height" constant="36" id="csc-Sq-waG"/>
@@ -124,28 +124,17 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXH-mp-f0l">
-                                <rect key="frame" x="151" y="631" width="73" height="28"/>
+                                <rect key="frame" x="112.5" y="627" width="150" height="32"/>
                                 <color key="backgroundColor" red="0.9806538637695793" green="1" blue="0.994506981012652" alpha="0.96543236301369861" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="JWa-uY-rBh"/>
-                                    <constraint firstAttribute="height" constant="28" id="yic-Fm-M5r"/>
+                                    <constraint firstAttribute="width" constant="150" id="JWa-uY-rBh"/>
+                                    <constraint firstAttribute="height" constant="32" id="yic-Fm-M5r"/>
                                 </constraints>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Save">
                                     <color key="titleColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="0.96999999999999997" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="doneEditTapped:" destination="g5X-QF-200" eventType="touchUpInside" id="h2a-RR-7t3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYj-rq-g0Y">
-                                <rect key="frame" x="309" y="20" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Gfr-WO-RDc"/>
-                                    <constraint firstAttribute="width" constant="50" id="aXB-qb-KP0"/>
-                                </constraints>
-                                <state key="normal" image="delete"/>
-                                <connections>
-                                    <action selector="exitEditTapped:" destination="g5X-QF-200" eventType="touchUpInside" id="tDh-Ld-3r2"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KEK-Kv-i7i">
@@ -177,7 +166,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lPl-bz-7QL">
-                                <rect key="frame" x="26" y="514.5" width="131.5" height="52.5"/>
+                                <rect key="frame" x="26" y="510.5" width="131.5" height="52.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gv-J4-dh0">
                                         <rect key="frame" x="0.0" y="0.0" width="131.5" height="20.5"/>
@@ -212,14 +201,14 @@
                                 </constraints>
                             </stackView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="96r-A6-aFT">
-                                <rect key="frame" x="19" y="463" width="337.5" height="29"/>
+                                <rect key="frame" x="19" y="459" width="337.5" height="29"/>
                                 <segments>
                                     <segment title="Circle"/>
                                     <segment title="Rectangle"/>
                                 </segments>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HSX-3b-RJi">
-                                <rect key="frame" x="177.5" y="508" width="187.5" height="66"/>
+                                <rect key="frame" x="177.5" y="504" width="187.5" height="66"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TrR-mz-6Dt">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="28"/>
@@ -274,11 +263,22 @@
                                     <action selector="copyParentTapped:" destination="g5X-QF-200" eventType="touchUpInside" id="SgY-4r-rb5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYj-rq-g0Y">
+                                <rect key="frame" x="16" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Gfr-WO-RDc"/>
+                                    <constraint firstAttribute="width" constant="30" id="aXB-qb-KP0"/>
+                                </constraints>
+                                <state key="normal" image="delete"/>
+                                <connections>
+                                    <action selector="exitEditTapped:" destination="g5X-QF-200" eventType="touchUpInside" id="tDh-Ld-3r2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="0.96543236301369861" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="96r-A6-aFT" firstAttribute="centerX" secondItem="Ag2-qF-feC" secondAttribute="centerX" id="0o3-kE-Z7n"/>
-                            <constraint firstItem="gYj-rq-g0Y" firstAttribute="top" secondItem="lZt-Xw-mHq" secondAttribute="bottom" id="33q-lW-bej"/>
+                            <constraint firstItem="gYj-rq-g0Y" firstAttribute="top" secondItem="lZt-Xw-mHq" secondAttribute="bottom" id="7wQ-TO-CEe"/>
                             <constraint firstAttribute="trailing" secondItem="HSX-3b-RJi" secondAttribute="trailing" constant="10" id="CuC-QT-yKL"/>
                             <constraint firstItem="UXH-mp-f0l" firstAttribute="centerX" secondItem="Ag2-qF-feC" secondAttribute="centerX" id="FoJ-fA-iwr"/>
                             <constraint firstItem="goB-0m-Xq9" firstAttribute="top" secondItem="lZt-Xw-mHq" secondAttribute="bottom" constant="20" id="GVP-xn-b4q"/>
@@ -290,7 +290,7 @@
                             <constraint firstItem="KEK-Kv-i7i" firstAttribute="centerX" secondItem="Ag2-qF-feC" secondAttribute="centerX" id="TS9-S2-SNn"/>
                             <constraint firstItem="96r-A6-aFT" firstAttribute="width" secondItem="Ag2-qF-feC" secondAttribute="width" multiplier="0.9" id="XZI-DS-iZp"/>
                             <constraint firstItem="mIU-2g-egm" firstAttribute="top" secondItem="UXH-mp-f0l" secondAttribute="bottom" constant="8" id="d5H-gr-NUK"/>
-                            <constraint firstItem="gYj-rq-g0Y" firstAttribute="trailing" secondItem="Ag2-qF-feC" secondAttribute="trailingMargin" id="jDt-d7-dXQ"/>
+                            <constraint firstItem="gYj-rq-g0Y" firstAttribute="leading" secondItem="Ag2-qF-feC" secondAttribute="leadingMargin" id="jAT-6D-n1F"/>
                             <constraint firstItem="goB-0m-Xq9" firstAttribute="centerX" secondItem="Ag2-qF-feC" secondAttribute="centerX" id="jE8-8t-T3d"/>
                             <constraint firstItem="Sr4-OM-ZQO" firstAttribute="top" secondItem="HSX-3b-RJi" secondAttribute="bottom" constant="13" id="nvf-lL-cNd"/>
                             <constraint firstItem="lPl-bz-7QL" firstAttribute="leading" secondItem="Ag2-qF-feC" secondAttribute="leadingMargin" constant="10" id="ow1-PH-ewc"/>
@@ -312,7 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8J-ba-JKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920.79999999999995" y="132.68365817091455"/>
+            <point key="canvasLocation" x="1143" y="133"/>
         </scene>
     </scenes>
     <resources>

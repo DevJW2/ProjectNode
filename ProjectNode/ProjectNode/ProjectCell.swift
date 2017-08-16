@@ -30,11 +30,13 @@ class BaseCell : UICollectionViewCell{
 
 class ProjectCell: BaseCell{
     
+    
     var nodeProject : NodeProject? {
         didSet{
             nameLabel.text = nodeProject?.projectName
             tagView.backgroundColor = nodeProject?.chosenTag
             //Change project preview, collaborators, tag
+            projectPreview.setImage(nodeProject?.projectPreviewImage, for: .normal)
             
         }
     }
@@ -66,20 +68,23 @@ class ProjectCell: BaseCell{
         return dateView
     }()
     
+    
+    
+    
     //GET PROJECT PREVIEW, SNAPSHOTS
     
-   /* let projectPreview: UIButton = {
+    
+    let projectPreview: UIButton = {
         let preview = UIButton()
         preview.translatesAutoresizingMaskIntoConstraints = false
         preview.backgroundColor = UIColor.blue
-        //preview.setBackgroundImage(UIImage(named: "projectNodeLogo"), for: .normal)
-        //preview.contentMode = .scaleAspectFill
+        //preview.contentMode = .scaleAspectFit
         //preview.clipsToBounds = true
-        preview.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        //preview.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
          
+        //return preview
         return preview
-        
-    }()*/
+    }()
     
     let separatorView: UIView = {
         let view = UIView()
@@ -116,9 +121,6 @@ class ProjectCell: BaseCell{
     override func setupViews(){
         //backgroundColor = UIColor.blue
         
-        let projectPreview = UIButton()
-        projectPreview.translatesAutoresizingMaskIntoConstraints = false
-        projectPreview.backgroundColor = UIColor.blue
         projectPreview.addTarget(self, action: #selector(previewTapped), for: .touchUpInside)
         
         
