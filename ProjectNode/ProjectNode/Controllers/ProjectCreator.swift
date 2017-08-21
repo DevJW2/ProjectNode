@@ -8,11 +8,15 @@
 
 
 protocol ProjectCreatorDelegate : class{
-    func formCompleted(nameProject : String?, tag : Int?)
+    //func formCompleted(nameProject : String?, tag : Int?)
+    func formCompleted(nameproject: String?)
 }
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import FirebaseAuthUI
+import FirebaseDatabase
 
 class ProjectCreator : UIViewController, UITextFieldDelegate{
     
@@ -21,15 +25,18 @@ class ProjectCreator : UIViewController, UITextFieldDelegate{
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var creatorView: UIView!
-    @IBOutlet weak var tagSelection: UISegmentedControl!
     @IBOutlet weak var exitButton: UIButton!
+    
+    var ref: DatabaseReference?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        creatorView.layer.cornerRadius = 12
-        doneButton.layer.cornerRadius = 14
+        //creatorView.layer.cornerRadius = 12
+        //doneButton.layer.cornerRadius = 14
         nameTextField.delegate = self
+        
+        ref = Database.database().reference()
     }
 
     @IBAction func doneButtonTapped(_ sender: Any) {
@@ -40,7 +47,8 @@ class ProjectCreator : UIViewController, UITextFieldDelegate{
 
         }
         else{
-            delegate?.formCompleted(nameProject: nameTextField.text, tag: tagSelection.selectedSegmentIndex)
+            delegate?.formCompleted(nameproject: nameTextField.text)
+            //delegate?.formCompleted(nameProject: nameTextField.text, tag: tagSelection.selectedSegmentIndex)
             dismiss(animated: true, completion:nil)
         }
     }

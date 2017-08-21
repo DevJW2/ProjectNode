@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+var selectedProject: NodeProject = NodeProject()
 
 class BaseCell : UICollectionViewCell{
     override init(frame: CGRect){
@@ -28,18 +28,24 @@ class BaseCell : UICollectionViewCell{
 
 }
 
+
 class ProjectCell: BaseCell{
+    
     
     
     var nodeProject : NodeProject? {
         didSet{
             nameLabel.text = nodeProject?.projectName
             tagView.backgroundColor = nodeProject?.chosenTag
-            //Change project preview, collaborators, tag
+            //Change project preview, tag
+            
+            //Project Preview Updation
             projectPreview.setImage(nodeProject?.projectPreviewImage, for: .normal)
+            nodeProject?.projectPreviewButton = projectPreview
             
         }
     }
+
  
     
     //NAME OF PROJECT
@@ -77,18 +83,20 @@ class ProjectCell: BaseCell{
     let projectPreview: UIButton = {
         let preview = UIButton()
         preview.translatesAutoresizingMaskIntoConstraints = false
-        preview.backgroundColor = UIColor.blue
-        //preview.contentMode = .scaleAspectFit
+        preview.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+        preview.imageView?.backgroundColor = UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
+        //preview.contentMode = .scaleAspectFill
+        //preview.imageView?.clipsToBounds = true
         //preview.clipsToBounds = true
         //preview.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-         
+        //preview.imageView?.layer.cornerRadius = 15
         //return preview
         return preview
     }()
     
     let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = UIColor.lightGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -109,31 +117,41 @@ class ProjectCell: BaseCell{
         let tagV = UIImageView()
         tagV.backgroundColor = UIColor.red
         tagV.translatesAutoresizingMaskIntoConstraints = false
-        tagV.layer.cornerRadius = 7.5
+        //tagV.layer.cornerRadius = 7.5
         return tagV
     }()
     
+    
     func previewTapped(sender: UIButton!) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "previewTappedNotification"), object: nil)
+        //Update Selected Projects Button, for Preview
+        selectedProject.projectPreviewButton = sender
     }
   
     
     override func setupViews(){
         //backgroundColor = UIColor.blue
         
-        projectPreview.addTarget(self, action: #selector(previewTapped), for: .touchUpInside)
         
+        projectPreview.addTarget(self, action: #selector(previewTapped), for: .touchUpInside)
+        projectPreview.backgroundColor = UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
         
         addSubview(projectPreview)
-        addSubview(separatorView)
+        //addSubview(separatorView)
         addSubview(nameLabel)
         addSubview(dateLabel)
         //addSubview(memberLabel)
-        addSubview(tagView)
+        //addSubview(tagView)
         
-        addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: projectPreview)
-        addConstraintsWithFormat(format: "V:|-16-[v0]-36-[v1(1)]|", views: projectPreview,separatorView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
+        
+        addConstraintsWithFormat(format: "H:|-0-[v0]-0-|", views: projectPreview)
+        addConstraintsWithFormat(format: "V:|-0-[v0]-36-|", views: projectPreview)
+        //addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
+        
+        
+       /* addConstraintsWithFormat(format: "H:|-0-[v0]-0-|", views: projectPreview)
+        addConstraintsWithFormat(format: "V:|-0-[v0]-36-[v1(1)]|", views: projectPreview,separatorView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)*/
         
         //memberLabel
         /*
@@ -149,7 +167,7 @@ class ProjectCell: BaseCell{
         addConstraint(NSLayoutConstraint(item: memberLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 15))
         */
         //tagView
-        
+        /*
         addConstraint(NSLayoutConstraint(item: tagView, attribute: .top, relatedBy: .equal, toItem: projectPreview, attribute: .top, multiplier: 1, constant: 0))
         //right constraint
         addConstraint(NSLayoutConstraint(item: tagView, attribute: .right, relatedBy: .equal, toItem: projectPreview, attribute: .right, multiplier: 1, constant: 0))
@@ -159,7 +177,7 @@ class ProjectCell: BaseCell{
         
         //height constraint
         addConstraint(NSLayoutConstraint(item: tagView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 15))
-        
+        */
         //nameLabel
         
         //top constraint
@@ -206,5 +224,8 @@ extension UIView{
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         
     }
+
     
 }
+
+

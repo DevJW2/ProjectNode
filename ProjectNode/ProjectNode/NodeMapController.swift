@@ -91,6 +91,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     }
     @IBAction func backHubTapped(_ sender: Any) {
         updateForm(projectPreviewImage: takeScreenShotImage())
+        selectedProject.myNodes = self.nodeList
         dismiss(animated: true, completion: nil)
     }
     
@@ -114,11 +115,19 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         sender.scale = 1.0
     }
     
+    func reversePinchedView(){
+        canvas.frame.size.width = UIScreen.main.bounds.width
+        canvas.frame.size.height = UIScreen.main.bounds.height
+    }
+    //Update Previews
     func updateForm(projectPreviewImage: UIImage?){
         for item in nodeProjects{
-            item.projectPreviewImage = projectPreviewImage
+            if item.projectPreviewButton == selectedProject.projectPreviewButton{
+                item.projectPreviewImage = projectPreviewImage
+            }
         }
     }
+
     
     
     func draggedView(sender: UIPanGestureRecognizer){
@@ -250,10 +259,10 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             item.getNode().frame.origin.x -= totalTransformX
             item.getNode().frame.origin.y -= totalTransformY
         }
-        updateNodeConnections()
-    
         totalTransformX = 0
         totalTransformY = 0
+        updateNodeConnections()
+    
     }
     
     func panNode(pan: UIPanGestureRecognizer){
@@ -321,12 +330,16 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     
     func takeScreenShotImage() -> UIImage{
         reverseNodePositions()
+        reversePinchedView()
         UIGraphicsBeginImageContext(canvas.frame.size)
         canvas.layer.render(in: UIGraphicsGetCurrentContext()!)
         let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        
+        //print(snapshotImage?.accessibilityIdentifier)
         return snapshotImage!
+        
     
     }
     

@@ -47,7 +47,7 @@ class NodeEditorController : UIViewController, UITextFieldDelegate{
         view.addSubview(neatColorPicker)
         
         nameTextField.delegate = self
-        
+        nodeDescription.layer.cornerRadius = 12
         
         //set values of the nodeEditor into the node
         nameTextField.text = selectedNode!.getName()
