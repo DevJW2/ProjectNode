@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" tag="-10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cB0-et-cm3">
-                                <rect key="frame" x="0.0" y="75" width="375" height="505"/>
+                                <rect key="frame" x="0.0" y="45" width="375" height="535"/>
                                 <connections>
                                     <segue destination="VfQ-YO-p4g" kind="embed" identifier="showLoginPages" id="8P5-Jj-HhG"/>
                                 </connections>
@@ -75,7 +75,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="cB0-et-cm3" firstAttribute="top" secondItem="O05-g4-kKQ" secondAttribute="bottom" constant="55" id="Bs7-ry-Fs9"/>
+                            <constraint firstItem="cB0-et-cm3" firstAttribute="top" secondItem="O05-g4-kKQ" secondAttribute="bottom" constant="25" id="Bs7-ry-Fs9"/>
                             <constraint firstAttribute="trailing" secondItem="cB0-et-cm3" secondAttribute="trailing" id="MqY-iu-hxz"/>
                             <constraint firstItem="lKT-b5-DsC" firstAttribute="top" secondItem="ibb-6d-n4V" secondAttribute="bottom" constant="20" id="NEE-E3-A1u"/>
                             <constraint firstItem="ibb-6d-n4V" firstAttribute="leading" secondItem="c1Q-q1-Aab" secondAttribute="leadingMargin" constant="20" id="RaT-bg-BtN"/>
@@ -387,13 +387,20 @@
                         <viewControllerLayoutGuide type="bottom" id="IBG-BP-ThS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qPe-Fq-Pra">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="505"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="535"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newProjectNodeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Son-bm-5Gp">
-                                <rect key="frame" x="157" y="191" width="60" height="60"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PageTwo" translatesAutoresizingMaskIntoConstraints="NO" id="MJL-oW-5SO">
+                                <rect key="frame" x="37" y="20" width="300" height="427"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create Beautiful Maps" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBt-xj-Ldb">
+                                <rect key="frame" x="84" y="455" width="207" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -411,13 +418,23 @@
                         <viewControllerLayoutGuide type="bottom" id="iJZ-WX-BwF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rNx-gF-XzI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="505"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="535"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PageOne" translatesAutoresizingMaskIntoConstraints="NO" id="AVD-TK-Y8r">
-                                <rect key="frame" x="51" y="20" width="272" height="439"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ProjectNode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03w-Pf-IkU">
+                                <rect key="frame" x="101" y="194" width="173" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Node Mind Mapping at its finest" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ro-kP-bJj">
+                                <rect key="frame" x="84" y="238" width="207" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -435,13 +452,20 @@
                         <viewControllerLayoutGuide type="bottom" id="yoi-nz-dTM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cGE-sM-y91">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="505"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="535"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PageTwo" translatesAutoresizingMaskIntoConstraints="NO" id="h5u-Zo-2so">
-                                <rect key="frame" x="16" y="162" width="343" height="144"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pageOne" translatesAutoresizingMaskIntoConstraints="NO" id="vdq-hh-70r">
+                                <rect key="frame" x="37" y="8" width="300" height="427"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Make a Node Map and start Linking!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eje-Ws-KOB">
+                                <rect key="frame" x="84" y="443" width="207" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -452,8 +476,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PageOne" width="270" height="438"/>
-        <image name="PageTwo" width="359" height="141"/>
-        <image name="newProjectNodeLogo" width="166" height="167"/>
+        <image name="PageTwo" width="370" height="639"/>
+        <image name="pageOne" width="370" height="638"/>
     </resources>
 </document>

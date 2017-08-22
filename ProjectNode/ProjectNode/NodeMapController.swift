@@ -26,7 +26,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     var totalTransformX: CGFloat = 0
     var totalTransformY: CGFloat = 0
     
-    let nodeColor = UIColor(red: 153/255, green: 204/255, blue: 255/255, alpha: 1)
+    //let nodeColor = UIColor(red: 153/255, green: 204/255, blue: 255/255, alpha: 1)
+    let nodeColor = UIColor(red: 51/255, green: 153/255, blue: 255/255, alpha: 1)
     
     let pinchRec = UIPinchGestureRecognizer()
     let panRec = UIPanGestureRecognizer()

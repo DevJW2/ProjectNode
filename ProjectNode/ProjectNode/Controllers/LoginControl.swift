@@ -79,10 +79,13 @@ class LoginControl : UIViewController{
                 if let user = user{
                     //user is found, go to new screen
                     LoadingOverlay.shared.showOverlay(view: self.view) // Animation
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "mainPage")
-                    self.present(vc, animated: true, completion: nil)
-                    LoadingOverlay.shared.hideOverlayView()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+                        LoadingOverlay.shared.hideOverlayView()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "mainPage")
+                        self.present(vc, animated: true, completion: nil)
+                    })
+                    //LoadingOverlay.shared.hideOverlayView()
                 }
                 else{
                     //check error and show message
