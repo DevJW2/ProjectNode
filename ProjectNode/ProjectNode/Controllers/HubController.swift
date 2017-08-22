@@ -65,6 +65,20 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
+  /*  func receiveNodeProjects(projectName: String, projectDate: String, projectImage: UIImage){
+        
+        node = NodeProject()
+        node.projectName = projectName
+        node.projectDate = projectDate
+        node.projectImage = projectImage
+        
+        
+        
+        
+        nodeProjects.append(node)
+    }*/
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let ProjectCreator = segue.destination as? ProjectCreator{
@@ -80,6 +94,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         collectionView.reloadData()
+        
     }
     
     // THIS IS IMPORTANT FOR CHANGING DATA FOR THE HUB PROJECTS
@@ -120,14 +135,17 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
             
             let rootref = Database.database().reference()
             let newProjectRef = rootref.child("projects").child(user.uid).childByAutoId()
-            let newProjectKey = newProjectRef.key
-           
+            node.specificKey = newProjectRef.key
             
-           newProjectRef.updateChildValues(node.dictValue)
             
+            newProjectRef.updateChildValues(node.dictValue)
         }
+        
+        
         nodeProjects.append(node)
     }
+    
+    
  
     
     func previewTapped(){
@@ -152,6 +170,8 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! ProjectCell
         cell.nodeProject = nodeProjects[indexPath.item]
         cell.backgroundColor = UIColor.white
+        //cell.layer.borderColor = UIColor(red: 51/255,green: 153/255,blue: 255/255, alpha: 1).cgColor
+        //cell.layer.borderWidth = 2
         //cell.backgroundColor = UIColor.red
         return cell
     }

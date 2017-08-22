@@ -97,10 +97,56 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         return UIInterfaceOrientationMask(rawValue: UInt(Int(UIInterfaceOrientationMask.portrait.rawValue)))
     }
     @IBAction func backHubTapped(_ sender: Any) {
-        updateForm(projectPreviewImage: takeScreenShotImage())
-        selectedProject.myNodes = self.nodeList
+        let image = takeScreenShotImage()
+
+        if getCurrentSelectedProject()?.previewImageURL == nil{
+            let imageName = NSUUID().uuidString
+            let storageRef = Storage.storage().reference().child("\(imageName).png")
         
+            StorageService.uploadImage(image, at: storageRef) { (downloadURL) in
+                guard let downloadURL = downloadURL else {
+                    return
+                }
         
+                let urlString = downloadURL.absoluteString
+                //print("image url: \(urlString)")
+                self.updateFormURL(previewImageURL: urlString)
+                
+            }
+            getCurrentSelectedProject()?.currentImageName = imageName
+            print("no preview image")
+        }
+        else{
+            let storageRef = Storage.storage().reference().child("\(getCurrentSelectedProject()!.currentImageName!).png")
+            StorageService.uploadImage(image, at: storageRef){ (downloadURL)
+            in
+                guard let downloadURL = downloadURL else {
+                    return
+                }
+            
+                let urlString = downloadURL.absoluteString
+                //print("image url: \(urlString)")
+                self.updateFormURL(previewImageURL: urlString)
+            }
+            print("yes preview image")
+            
+        }
+        self.updateForm(projectPreviewImage: image)
+        getCurrentSelectedProject()?.myNodes = self.nodeList
+ 
+        /*
+         if let uploadData = UIImagePNGRepresentation(projectPreviewImage){
+         storageRef.putData(uploadData, metadata: nil, completion: {
+            (metadata, error) in
+                if error != nil{
+                        print(error)
+                        return
+            }
+         
+                print(metaData)
+         
+            })
+         }*/
         
         dismiss(animated: true, completion: nil)
     }
@@ -130,12 +176,40 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         canvas.frame.size.height = UIScreen.main.bounds.height
     }
     //Update Previews
-    func updateForm(projectPreviewImage: UIImage?){
+        func updateForm(projectPreviewImage: UIImage?){
         for item in nodeProjects{
             if item.projectPreviewButton == selectedProject.projectPreviewButton{
                 item.projectPreviewImage = projectPreviewImage
             }
         }
+    }
+    func updateFormURL(previewImageURL: String?){
+        print("updated form url")
+        for item in nodeProjects{
+            if item.projectPreviewButton == selectedProject.projectPreviewButton{
+                item.previewImageURL = previewImageURL
+                
+                let user = Auth.auth().currentUser
+                if let user = user{
+                    let rootref = Database.database().reference()
+                    let newProjectRef = rootref.child("projects").child(user.uid).child(item.specificKey!)
+                    
+                    
+                    newProjectRef.updateChildValues(item.dictValue)
+                }
+                
+            }
+        }
+    }
+    
+    func getCurrentSelectedProject() -> NodeProject? {
+        
+        for item in nodeProjects{
+            if item.projectPreviewButton == selectedProject.projectPreviewButton{
+                return item
+            }
+        }
+        return nil
     }
 
     

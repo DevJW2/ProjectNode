@@ -16,35 +16,23 @@ import FirebaseStorage
 
 class NodeProject : NSObject{
     var projectPreviewButton: UIButton?
-    var projectPreviewImage : UIImage?
-    var projectName : String?
-    var projectDate : String?
+    var projectPreviewImage : UIImage? //Update
+    var projectName : String? //Update
+    var projectDate : String? //Update
     var collaboratorCount : Int?
     var chosenTag : UIColor?
     var myNodes = [Node]()
-    
+    var previewImageURL : String? //Update
+    var specificKey : String? 
+    var currentImageName: String? 
     
     var dictValue: [String: Any]{
         
         return [
             "projectName" : projectName,
-            "projectDate" : projectDate
+            "projectDate" : projectDate,
+            "projectImage" : previewImageURL
         ]
     
-    }/*
-    let storageRef = Storage.storage().reference().child("myImage.png")
-    
-    if let uploadData = UIImagePNGRepresentation(projectPreviewImage){
-        storageRef.putData(uploadData, metadata: nil, completion: {
-            (metadata, error) in
-            if error != nil{
-                print(error)
-                return
-            }
-            
-            print(metaData)
-        
-        })
     }
- */
 }

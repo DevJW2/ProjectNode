@@ -19,6 +19,7 @@
 		0D11967F1F2909BB00E9805D /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1196751F2909BB00E9805D /* YoshikoTextField.swift */; };
 		0D91F4AB1F27859600C1EB7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D91F4AA1F27859600C1EB7E /* AppDelegate.swift */; };
 		0D91F4B21F27859600C1EB7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D91F4B11F27859600C1EB7E /* Assets.xcassets */; };
+		0DAEE5B51F4C8FAA005E5F2C /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAEE5B41F4C8FAA005E5F2C /* StorageService.swift */; };
 		0DF132D21F2A7055007675C2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF132CF1F2A7055007675C2 /* Login.storyboard */; };
 		0DF132D31F2A7055007675C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF132D01F2A7055007675C2 /* Main.storyboard */; };
 		0DF132D41F2A7055007675C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF132D11F2A7055007675C2 /* LaunchScreen.storyboard */; };
@@ -58,6 +59,7 @@
 		0D91F4A71F27859600C1EB7E /* ProjectNode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectNode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D91F4AA1F27859600C1EB7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D91F4B11F27859600C1EB7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0DAEE5B41F4C8FAA005E5F2C /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageService.swift; path = Services/StorageService.swift; sourceTree = "<group>"; };
 		0DF132CF1F2A7055007675C2 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = Storyboards/Login.storyboard; sourceTree = "<group>"; };
 		0DF132D01F2A7055007675C2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
 		0DF132D11F2A7055007675C2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		0D91F4A91F27859600C1EB7E /* ProjectNode */ = {
 			isa = PBXGroup;
 			children = (
+				0DAEE5B31F4C8F4F005E5F2C /* Services */,
 				0D11966A1F29097300E9805D /* TextFieldEffects */,
 				0D91F4C01F27863F00C1EB7E /* Models */,
 				0D91F4BF1F27863A00C1EB7E /* Views */,
@@ -203,6 +206,14 @@
 				0DF132FB1F2FC5B5007675C2 /* Node.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		0DAEE5B31F4C8F4F005E5F2C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0DAEE5B41F4C8FAA005E5F2C /* StorageService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		1D11ACF69B39A4213B73607B /* Frameworks */ = {
@@ -362,6 +373,7 @@
 				0DF132F21F2A9AF3007675C2 /* ProjectCreator.swift in Sources */,
 				0D11967C1F2909BB00E9805D /* MinoruTextField.swift in Sources */,
 				0DF132E11F2A707E007675C2 /* PageThreeViewController.swift in Sources */,
+				0DAEE5B51F4C8FAA005E5F2C /* StorageService.swift in Sources */,
 				0DF132FA1F2FC569007675C2 /* NodeMapController.swift in Sources */,
 				0DF132DD1F2A707E007675C2 /* LoginControl.swift in Sources */,
 				0D11967A1F2909BB00E9805D /* KaedeTextField.swift in Sources */,
