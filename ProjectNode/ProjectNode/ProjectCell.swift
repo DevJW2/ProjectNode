@@ -42,6 +42,7 @@ class ProjectCell: BaseCell{
             //Project Preview Updation
             projectPreview.setImage(nodeProject?.projectPreviewImage, for: .normal)
             nodeProject?.projectPreviewButton = projectPreview
+            dateLabel.text = nodeProject?.projectDate
             
         }
     }
@@ -61,14 +62,8 @@ class ProjectCell: BaseCell{
     let dateLabel: UILabel = {
         let dateView = UILabel()
         dateView.translatesAutoresizingMaskIntoConstraints = false
-        let date = Date()
-        let calendar = Calendar.current
-        
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        
-        dateView.text = "\(month)/\(day)/\(year)"
+
+        dateView.text = ""
         dateView.textAlignment = NSTextAlignment.right
         
         return dateView

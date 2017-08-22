@@ -9,7 +9,7 @@
 
 protocol ProjectCreatorDelegate : class{
     //func formCompleted(nameProject : String?, tag : Int?)
-    func formCompleted(nameproject: String?)
+    func formCompleted(nameproject: String?, dateCreated: String? )
 }
 
 import Foundation
@@ -47,8 +47,18 @@ class ProjectCreator : UIViewController, UITextFieldDelegate{
 
         }
         else{
-            delegate?.formCompleted(nameproject: nameTextField.text)
+            let date = Date()
+            let calendar = Calendar.current
+            
+            let year = calendar.component(.year, from: date)
+            let month = calendar.component(.month, from: date)
+            let day = calendar.component(.day, from: date)
+            
+            let dateCreated = "\(month)/\(day)/\(year)"
+            
+            delegate?.formCompleted(nameproject: nameTextField.text, dateCreated: dateCreated)
             //delegate?.formCompleted(nameProject: nameTextField.text, tag: tagSelection.selectedSegmentIndex)
+
             dismiss(animated: true, completion:nil)
         }
     }

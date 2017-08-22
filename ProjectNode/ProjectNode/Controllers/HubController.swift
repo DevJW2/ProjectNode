@@ -107,12 +107,25 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         //Add Projects To Hub
         nodeProjects.append(node)
     }*/
-    func formCompleted(nameproject: String?) {
+    func formCompleted(nameproject: String?, dateCreated: String?) {
         collectionView.reloadData()
         let node = NodeProject()
         //Project Name Updated
         node.projectName = nameproject
+        node.projectDate = dateCreated
         
+        
+        let user = Auth.auth().currentUser
+        if let user = user{
+            
+            let rootref = Database.database().reference()
+            let newProjectRef = rootref.child("projects").child(user.uid).childByAutoId()
+            let newProjectKey = newProjectRef.key
+           
+            
+           newProjectRef.updateChildValues(node.dictValue)
+            
+        }
         nodeProjects.append(node)
     }
  

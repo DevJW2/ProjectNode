@@ -8,6 +8,10 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
+import FirebaseAuthUI
 
 var selectedNode : Node?
 
@@ -52,7 +56,9 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         nodeList.append(ancestorNode)
         ancestorNode.getNode().tag = -99
         canvas.addSubview(ancestorNode.getNode())
-        //canvas.backgroundColor = UIColor.green
+        //canvas.backgroundColor = UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
+        //canvas.layer.borderWidth = 1
+        //canvas.layer.borderColor = UIColor.white.cgColor
 
         NotificationCenter.default.addObserver(self, selector: #selector(nodeSelected), name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
         
@@ -93,6 +99,9 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     @IBAction func backHubTapped(_ sender: Any) {
         updateForm(projectPreviewImage: takeScreenShotImage())
         selectedProject.myNodes = self.nodeList
+        
+        
+        
         dismiss(animated: true, completion: nil)
     }
     

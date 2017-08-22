@@ -8,6 +8,11 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseAuthUI
+import FirebaseStorage
+
 
 class NodeProject : NSObject{
     var projectPreviewButton: UIButton?
@@ -18,14 +23,28 @@ class NodeProject : NSObject{
     var chosenTag : UIColor?
     var myNodes = [Node]()
     
+    
     var dictValue: [String: Any]{
         
         return [
             "projectName" : projectName,
             "projectDate" : projectDate
-            
-        
         ]
     
+    }/*
+    let storageRef = Storage.storage().reference().child("myImage.png")
+    
+    if let uploadData = UIImagePNGRepresentation(projectPreviewImage){
+        storageRef.putData(uploadData, metadata: nil, completion: {
+            (metadata, error) in
+            if error != nil{
+                print(error)
+                return
+            }
+            
+            print(metaData)
+        
+        })
     }
+ */
 }
