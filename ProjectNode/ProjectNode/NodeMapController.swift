@@ -93,6 +93,102 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         
     
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        obtainNode()
+    }
+    
+    
+    
+    func obtainNode(){
+        let ref: DatabaseReference = Database.database().reference()
+        if let user = Auth.auth().currentUser{
+            ref.child("nodes").child((getCurrentSelectedProject()?.specificKey)!).observeSingleEvent(of: .value, with: {(snapshot)
+                in
+                
+                
+                guard let myNodeSnapshots = snapshot.children.allObjects as? [DataSnapshot],
+                let myKey = snapshot.key as? String else {
+                    return
+                }
+                
+                for nodeSnapshots in myNodeSnapshots{
+                    if myKey == self.getCurrentSelectedProject()?.specificKey{
+                    
+                        let nodeDict = nodeSnapshots.value as? [String: Any]
+                        let nodeName = nodeDict?["nodeName"] as? String
+                        let nodeDescription = nodeDict?["nodeDescription"] as? String
+                        let nodeLimit = nodeDict?["nodeLimit"] as? Int
+                        let xCoordinate = nodeDict?["xCoordinate"] as? Double
+                        let yCoordinate = nodeDict?["yCoordinate"] as? Double
+                        let color = nodeDict?["hexColor"] as? String
+                        let borderColor = nodeDict?["borderColor"] as? String
+                        let previousBorderColor = nodeDict?["previousBorderColor"] as? String
+                        let childNodes = nodeDict?["childNodes"] as? Int
+                        let tag = nodeDict?["tag"] as? Int
+                        
+                        self.createObtainedNode(nodeName: nodeName!, nodeDescription: nodeDescription!, nodeLimit: nodeLimit!, xCoordinate: xCoordinate!, yCoordinate: yCoordinate!, color: color!, borderColor: borderColor!, previousBorderColor: previousBorderColor!, childNodes: childNodes!, tag: tag!)
+                    }
+                    
+                }
+                
+                
+            })
+        }
+    
+    }
+    //Everytime it loads back in... it'll create more nodes, instead try making it update instead of add
+    
+    func createObtainedNode(nodeName: String, nodeDescription: String, nodeLimit: Int, xCoordinate: Double, yCoordinate: Double, color: String, borderColor: String, previousBorderColor: String, childNodes: Int, tag: Int){
+        /*let ancestorNode = Node(_distance: 100, _color: nodeColor, _size: nodeSize, _name: "Hi!", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))*/
+        
+    
+        
+        let node = Node(_distance: 100, _color: hexStringToUIColor(hex: color), _size: 50, _name: nodeName, _descript: nodeDescription, _nodeLimit: nodeLimit, _xCoordinate: xCoordinate, _yCoordinate: yCoordinate)
+        
+        node.setBorderColor(value: hexStringToUIColor(hex: borderColor))
+        node.setPreviousBorderColor(value: hexStringToUIColor(hex: previousBorderColor))
+        node.childNodes = childNodes
+        node.getNode().tag = tag
+        
+       /* if node.getNode().tag == -99{
+            selectedNode = node
+        } */
+        
+        nodeList.append(node)
+        
+        //canvas.addSubview(node.getNode())
+    }
+    
+    func addObtainedNodeToView(value: Node){
+        /*nodeList.append(newNode!)
+        
+        canvas.addSubview(newNode!.getNode())
+        selectedNode!.childNodes += 1
+        
+        newNode?.setConnectedNode(item: selectedNode!)
+        
+        //createNodeConnection(selectNode: selectedNode!, createdNode: newNode!)
+        canvas.insertSubview(newNode!.getNode(), belowSubview: nodeCreator)
+        createNodeConnection(selectNode: newNode!, createdNode: selectedNode!)*/
+
+        
+        
+        for node in nodeList{
+            canvas.addSubview(node.getNode())
+            for connected in nodeList{
+                if node == connected.connectedNode{
+                    createNodeConnection(selectNode: node, createdNode: connected)
+                }
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask(rawValue: UInt(Int(UIInterfaceOrientationMask.portrait.rawValue)))
     }
@@ -146,13 +242,16 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             })
          }*/
         
-        
+        //Updates firebase for each node
         let rootref = Database.database().reference()
         let newNodeRef = rootref.child("nodes").child((getCurrentSelectedProject()?.specificKey)!)
         for node in nodeList{
             let randomNodeKey = NSUUID().uuidString
             newNodeRef.updateChildValues([randomNodeKey: node.dictValue])
         }
+        
+        //Works after you get the connections
+        //removeNodes(node: nodeList[0])
         
         dismiss(animated: true, completion: nil)
     }
@@ -361,6 +460,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         for item in nodeList{
             item.getNode().frame.origin.x += transformValueX
             item.getNode().frame.origin.y += transformValueY
+            item.xCoord = Double(item.getNode().frame.origin.x)
+            item.yCoord = Double(item.getNode().frame.origin.y)
         }
         totalTransformX += transformValueX
         totalTransformY += transformValueY
@@ -372,6 +473,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         for item in nodeList{
             item.getNode().frame.origin.x -= totalTransformX
             item.getNode().frame.origin.y -= totalTransformY
+            item.xCoord = Double(item.getNode().frame.origin.x)
+            item.yCoord = Double(item.getNode().frame.origin.y)
         }
         totalTransformX = 0
         totalTransformY = 0
@@ -383,6 +486,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         let location = pan.location(in: canvas) // get pan location
         if let selectedNode = selectedNode{
             selectedNode.getNode().center = location // set button to where finger is
+            selectedNode.xCoord = Double(location.x)
+            selectedNode.yCoord = Double(location.y)
             selectedNode.removeConnector()
         //selectedNode!.getConnectedNode().removeConnector()
         }
@@ -460,4 +565,26 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     
 
 
+}
+
+func hexStringToUIColor (hex:String) -> UIColor {
+    var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+    
+    if (cString.hasPrefix("#")) {
+        cString.remove(at: cString.startIndex)
+    }
+    
+    if ((cString.characters.count) != 6) {
+        return UIColor.gray
+    }
+    
+    var rgbValue:UInt32 = 0
+    Scanner(string: cString).scanHexInt32(&rgbValue)
+    
+    return UIColor(
+        red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+        green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+        blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+        alpha: CGFloat(1.0)
+    )
 }

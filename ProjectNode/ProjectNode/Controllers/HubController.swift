@@ -160,7 +160,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         nodeProjects.append(node)
         
     }
-    
+    //UPDATE INSTEAD OF ADD
     func retrieveData(){
         collectionView.reloadData()
         retrievingService.obtainProject()

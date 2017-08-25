@@ -12,21 +12,21 @@ import UIKit
 class Node : NSObject{
     
     //Node Properties
-    var distance: Double // UPDATE
-    var color: UIColor //UPDATE
-    var borderColor: UIColor = UIColor.white //UPDATE
-    var previousBorderColor: UIColor = UIColor.white //Has to be the same as borderColor //UPDATE
+    var distance: Double
+    var color: UIColor
+    var borderColor: UIColor = UIColor.white
+    var previousBorderColor: UIColor = UIColor.white //Has to be the same as borderColor
     var size: Double
-    var name: String //UPDATE
-    var childNodes: Int = 0 //UPDATE
-    var nodeLimit: Int //UPDATE
-    var descript: String //UPDATE
+    var name: String
+    var childNodes: Int = 0
+    var nodeLimit: Int
+    var descript: String
     var node: UIButton?
     var connector: CAShapeLayer? //UPDATE
     var path: UIBezierPath?
     var connectedNode : Node? //UPDATE
-    var xCoord: Double //UPDATE
-    var yCoord: Double //UPDATE
+    var xCoord: Double
+    var yCoord: Double
     
     
     //Creation of First Node
@@ -183,22 +183,75 @@ class Node : NSObject{
         //selectedNode!.getNode().backgroundColor = UIColor.red
         selectedNode!.getNode().layer.borderColor = UIColor.red.cgColor
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
+
     }
     
     //writes node Data
     
     var dictValue: [String: Any]{
-        
+        // ADD TAGS ASDFJASJDFAJKDFJAKLSJDFLKASJDFKLASJDLKAFJ
         return [
             "nodeName" : name,
             "nodeDescription" : descript,
             "nodeLimit" : nodeLimit,
             "xCoordinate" : xCoord,
-            "yCoordinate" : yCoord
+            "yCoordinate" : yCoord,
+            "hexColor" : color.htmlRGBColor,
+            //Extra Properties
+            "borderColor": borderColor.htmlRGBColor,
+            "previousBorderColor": previousBorderColor.htmlRGBColor,
+            "childNodes" : childNodes,
+            "tag" : node!.tag,
+            "connectedNode" : [
+                "nodeName": connectedNode?.name,
+                "nodeDescription" : connectedNode?.descript,
+                "nodeLimit" : connectedNode?.nodeLimit,
+                "xCoordinate" : connectedNode?.xCoord,
+                "yCoordinate" : connectedNode?.yCoord,
+                "hexColor" : connectedNode?.color.htmlRGBColor,
+                "borderColor" : connectedNode?.borderColor.htmlRGBColor,
+                "previousBorderColor" : connectedNode?.previousBorderColor.htmlRGBColor,
+                "childNodes" : connectedNode?.childNodes,
+                "tag" : connectedNode?.getNode().tag
+            
+            
+                ] as? [String: Any]
+            
         ]
         
     }
     
 
 
+}
+
+
+extension UIColor {
+    var rgbComponents:(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        if getRed(&r, green: &g, blue: &b, alpha: &a) {
+            return (r,g,b,a)
+        }
+        return (0,0,0,0)
+    }
+    // hue, saturation, brightness and alpha components from UIColor**
+    var hsbComponents:(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+        var hue:CGFloat = 0
+        var saturation:CGFloat = 0
+        var brightness:CGFloat = 0
+        var alpha:CGFloat = 0
+        if getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha){
+            return (hue,saturation,brightness,alpha)
+        }
+        return (0,0,0,0)
+    }
+    var htmlRGBColor:String {
+        return String(format: "#%02x%02x%02x", Int(rgbComponents.red * 255), Int(rgbComponents.green * 255),Int(rgbComponents.blue * 255))
+    }
+    var htmlRGBaColor:String {
+        return String(format: "#%02x%02x%02x%02x", Int(rgbComponents.red * 255), Int(rgbComponents.green * 255),Int(rgbComponents.blue * 255),Int(rgbComponents.alpha * 255) )
+    }
 }

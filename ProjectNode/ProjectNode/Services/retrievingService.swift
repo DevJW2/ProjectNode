@@ -115,9 +115,29 @@ struct retrievingService{
     }
     
     //Reads the node data
-    static func obtainNode(){
-        
-    
+    static func obtainNode(projectKey: String){
+        let ref: DatabaseReference = Database.database().reference()
+        if let user = Auth.auth().currentUser{
+            ref.child("nodes").child(projectKey).observeSingleEvent(of: .value, with: {(snapshot)
+                in
+                
+                
+                guard let myNodeSnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
+                    return
+                }
+                
+                for nodeSnapshots in myNodeSnapshots{
+                    let nodeDict = nodeSnapshots.value as? [String: Any]
+                    let nodeName = nodeDict?["nodeName"] as? String
+                    
+                    
+                    
+                }
+                
+                //Create nodes
+                
+            })
+        }
     
     }
     
