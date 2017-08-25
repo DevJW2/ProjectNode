@@ -150,7 +150,7 @@ struct retrievingService{
     //function used to generate the nodes
     //nodes need to remember their parent and the connector lines and such..
     
-    
+    /*
     static func receiveNodes() -> UIButton{
         /*let ancestorNode = Node(_distance: 100, _color: nodeColor, _size: nodeSize, _name: "Hi!", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))*/
         
@@ -161,7 +161,7 @@ struct retrievingService{
         return node.getNode()
         
         
-    }
+    }*/
     
 
 

@@ -23,7 +23,7 @@ class NodeProject : NSObject{
     var projectDate : String? //Update
     var collaboratorCount : Int?
     var chosenTag : UIColor?
-    var myNodes = [Node]()
+    //var myNodes = [Node]()
     var previewImageURL : String? //Update
     var specificKey : String? //Update
     var currentImageName: String? //Update
@@ -36,7 +36,7 @@ class NodeProject : NSObject{
             "projectName" : projectName,
             "projectDate" : projectDate,
             "projectImage" : previewImageURL,
-            "projectStorageImageKey" : currentImageName
+            "projectStorageImageKey" : currentImageName,
         ]
     
     }

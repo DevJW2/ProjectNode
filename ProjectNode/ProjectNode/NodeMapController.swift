@@ -130,7 +130,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             
         }
         self.updateForm(projectPreviewImage: image)
-        getCurrentSelectedProject()?.myNodes = self.nodeList
+        //getCurrentSelectedProject()?.myNodes = self.nodeList
  
         /*
          if let uploadData = UIImagePNGRepresentation(projectPreviewImage){
@@ -145,6 +145,14 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
          
             })
          }*/
+        
+        
+        let rootref = Database.database().reference()
+        let newNodeRef = rootref.child("nodes").child((getCurrentSelectedProject()?.specificKey)!)
+        for node in nodeList{
+            let randomNodeKey = NSUUID().uuidString
+            newNodeRef.updateChildValues([randomNodeKey: node.dictValue])
+        }
         
         dismiss(animated: true, completion: nil)
     }
@@ -224,7 +232,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             }
         }
     }
-    //BUGGY AS FUCK, THIS DOESN'T CHOOSE THE RIGHT PROJECT TO SEND THE PREVIEW IMAGE TO :(
+  
     func getCurrentSelectedProject() -> NodeProject? {
         for item in nodeProjects{
             if item.projectPreviewButton == selectedProject.projectPreviewButton{

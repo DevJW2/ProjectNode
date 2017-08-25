@@ -25,8 +25,8 @@ class Node : NSObject{
     var connector: CAShapeLayer? //UPDATE
     var path: UIBezierPath?
     var connectedNode : Node? //UPDATE
-    var xCoord: Double? //UPDATE
-    var yCoord: Double? //UPDATE
+    var xCoord: Double //UPDATE
+    var yCoord: Double //UPDATE
     
     
     //Creation of First Node
@@ -187,13 +187,17 @@ class Node : NSObject{
     
     //writes node Data
     
-   /* var dictValue: [String: Any]{
+    var dictValue: [String: Any]{
         
         return [
-            ""
+            "nodeName" : name,
+            "nodeDescription" : descript,
+            "nodeLimit" : nodeLimit,
+            "xCoordinate" : xCoord,
+            "yCoordinate" : yCoord
         ]
         
-    }*/
+    }
     
 
 

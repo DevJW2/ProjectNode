@@ -149,10 +149,11 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
             
             let rootref = Database.database().reference()
             let newProjectRef = rootref.child("projects").child(user.uid).childByAutoId()
+            
             node.specificKey = newProjectRef.key
             
-            
             newProjectRef.updateChildValues(node.dictValue)
+           
         }
         
         
@@ -172,6 +173,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         let storyboard = UIStoryboard(name: "LayoutEditor", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "nodePage")
         self.present(vc, animated: true, completion: nil)
+        
     }
     
     
