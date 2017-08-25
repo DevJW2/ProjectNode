@@ -24,7 +24,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     
     var nodeList : [Node] = []
     var buttonCenter = CGPoint.zero
-    var newNode : Node?
+    var newNode : Node? 
     var nodeSize : Double = 50.0
     
     var totalTransformX: CGFloat = 0
@@ -114,7 +114,6 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
                 
             }
             getCurrentSelectedProject()?.currentImageName = imageName
-            print("no preview image")
         }
         else{
             let storageRef = Storage.storage().reference().child("\(getCurrentSelectedProject()!.currentImageName!).png")
@@ -128,7 +127,6 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
                 //print("image url: \(urlString)")
                 self.updateFormURL(previewImageURL: urlString)
             }
-            print("yes preview image")
             
         }
         self.updateForm(projectPreviewImage: image)
@@ -176,17 +174,42 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         canvas.frame.size.height = UIScreen.main.bounds.height
     }
     //Update Previews
-        func updateForm(projectPreviewImage: UIImage?){
+    func updateForm(projectPreviewImage: UIImage?){
+        print("image updation happened")
         for item in nodeProjects{
             if item.projectPreviewButton == selectedProject.projectPreviewButton{
+                print(item.projectName)
+                print(selectedProject.projectName)
+                print("has been set equal and will now set preview image to image")
                 item.projectPreviewImage = projectPreviewImage
             }
         }
     }
     func updateFormURL(previewImageURL: String?){
-        print("updated form url")
+        print("UPDATING FORM URL")
+        print("Print out all item buttons first")
+        print("\n")
+        for item in nodeProjects{
+            print("item name: ")
+            print(item.projectName)
+            print("item button: ")
+            print(item.projectPreviewButton)
+            print("\n")
+        }
+        
+        
         for item in nodeProjects{
             if item.projectPreviewButton == selectedProject.projectPreviewButton{
+                print("In updating the form url........")
+                print("the two items are now equal")
+                print("item button")
+                print(item.projectPreviewButton)
+                print(item.projectName)
+                print("selected project button")
+                print(selectedProject.projectPreviewButton)
+                print(selectedProject.projectName)
+                print("\n")
+                
                 item.previewImageURL = previewImageURL
                 
                 let user = Auth.auth().currentUser
@@ -201,9 +224,8 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             }
         }
     }
-    
+    //BUGGY AS FUCK, THIS DOESN'T CHOOSE THE RIGHT PROJECT TO SEND THE PREVIEW IMAGE TO :(
     func getCurrentSelectedProject() -> NodeProject? {
-        
         for item in nodeProjects{
             if item.projectPreviewButton == selectedProject.projectPreviewButton{
                 return item

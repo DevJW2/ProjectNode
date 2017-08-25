@@ -14,6 +14,8 @@ import FirebaseAuthUI
 import FirebaseStorage
 
 
+
+
 class NodeProject : NSObject{
     var projectPreviewButton: UIButton?
     var projectPreviewImage : UIImage? //Update
@@ -23,15 +25,18 @@ class NodeProject : NSObject{
     var chosenTag : UIColor?
     var myNodes = [Node]()
     var previewImageURL : String? //Update
-    var specificKey : String? 
-    var currentImageName: String? 
+    var specificKey : String? //Update
+    var currentImageName: String? //Update
+    
+    var assignedProject : UIButton?
     
     var dictValue: [String: Any]{
         
         return [
             "projectName" : projectName,
             "projectDate" : projectDate,
-            "projectImage" : previewImageURL
+            "projectImage" : previewImageURL,
+            "projectStorageImageKey" : currentImageName
         ]
     
     }

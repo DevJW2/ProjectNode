@@ -17,6 +17,7 @@
 		0D11967D1F2909BB00E9805D /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1196731F2909BB00E9805D /* TextFieldEffects.swift */; };
 		0D11967E1F2909BB00E9805D /* YokoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1196741F2909BB00E9805D /* YokoTextField.swift */; };
 		0D11967F1F2909BB00E9805D /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1196751F2909BB00E9805D /* YoshikoTextField.swift */; };
+		0D31FE421F4F6F370068016B /* retrievingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D31FE411F4F6F370068016B /* retrievingService.swift */; };
 		0D91F4AB1F27859600C1EB7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D91F4AA1F27859600C1EB7E /* AppDelegate.swift */; };
 		0D91F4B21F27859600C1EB7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D91F4B11F27859600C1EB7E /* Assets.xcassets */; };
 		0DAEE5B51F4C8FAA005E5F2C /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAEE5B41F4C8FAA005E5F2C /* StorageService.swift */; };
@@ -56,6 +57,7 @@
 		0D1196731F2909BB00E9805D /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFieldEffects.swift; path = TextFieldEffects/TextFieldEffects.swift; sourceTree = "<group>"; };
 		0D1196741F2909BB00E9805D /* YokoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YokoTextField.swift; path = TextFieldEffects/YokoTextField.swift; sourceTree = "<group>"; };
 		0D1196751F2909BB00E9805D /* YoshikoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YoshikoTextField.swift; path = TextFieldEffects/YoshikoTextField.swift; sourceTree = "<group>"; };
+		0D31FE411F4F6F370068016B /* retrievingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = retrievingService.swift; path = Services/retrievingService.swift; sourceTree = "<group>"; };
 		0D91F4A71F27859600C1EB7E /* ProjectNode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectNode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D91F4AA1F27859600C1EB7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D91F4B11F27859600C1EB7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				0DAEE5B41F4C8FAA005E5F2C /* StorageService.swift */,
+				0D31FE411F4F6F370068016B /* retrievingService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				0D11967E1F2909BB00E9805D /* YokoTextField.swift in Sources */,
 				0D1196781F2909BB00E9805D /* IsaoTextField.swift in Sources */,
 				0D1196761F2909BB00E9805D /* AkiraTextField.swift in Sources */,
+				0D31FE421F4F6F370068016B /* retrievingService.swift in Sources */,
 				0DF132E01F2A707E007675C2 /* LoginViewController.swift in Sources */,
 				0DF132E31F2A707E007675C2 /* LoginPageController.swift in Sources */,
 				0DF132E21F2A707E007675C2 /* PageTwoViewController.swift in Sources */,

@@ -12,19 +12,22 @@ import UIKit
 class Node : NSObject{
     
     //Node Properties
-    var distance: Double
-    var color: UIColor
-    var borderColor: UIColor = UIColor.white
-    var previousBorderColor: UIColor = UIColor.white //Has to be the same as borderColor
+    var distance: Double // UPDATE
+    var color: UIColor //UPDATE
+    var borderColor: UIColor = UIColor.white //UPDATE
+    var previousBorderColor: UIColor = UIColor.white //Has to be the same as borderColor //UPDATE
     var size: Double
-    var name: String
-    var childNodes: Int = 0
-    var nodeLimit: Int
-    var descript: String
+    var name: String //UPDATE
+    var childNodes: Int = 0 //UPDATE
+    var nodeLimit: Int //UPDATE
+    var descript: String //UPDATE
     var node: UIButton?
-    var connector: CAShapeLayer?
+    var connector: CAShapeLayer? //UPDATE
     var path: UIBezierPath?
-    var connectedNode : Node?
+    var connectedNode : Node? //UPDATE
+    var xCoord: Double? //UPDATE
+    var yCoord: Double? //UPDATE
+    
     
     //Creation of First Node
     init(_distance: Double, _color: UIColor, _size: Double, _name: String, _descript: String, _nodeLimit: Int, _xCoordinate : Double, _yCoordinate: Double){
@@ -35,6 +38,8 @@ class Node : NSObject{
         name = _name
         descript = _descript
         nodeLimit = _nodeLimit
+        xCoord = _xCoordinate
+        yCoord = _yCoordinate
 
         node = UIButton(frame: CGRect(x: _xCoordinate - size/2, y: _yCoordinate - size/2, width: size, height: size))
         
@@ -63,6 +68,9 @@ class Node : NSObject{
         let xCoordinate = distance * cos(randomAngle * (Double.pi / 180)) + Double(selectedNode!.getNode().frame.origin.x)
         let yCoordinate = distance * sin(randomAngle * (Double.pi / 180)) + Double(selectedNode!.getNode().frame.origin.y)
         
+        xCoord = xCoordinate
+        yCoord = yCoordinate
+        
         node = UIButton(frame: CGRect(x: xCoordinate, y: yCoordinate, width: size, height: size))
         
         //More Node properties
@@ -74,6 +82,7 @@ class Node : NSObject{
         node!.titleLabel?.font = UIFont(name: "Times New Roman", size: 18)
         
     }
+
     
     //Data about the parent node of each node
     func setConnectedNode(item: Node){
@@ -176,6 +185,15 @@ class Node : NSObject{
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "nodeSelectedNotification"), object: nil)
     }
     
+    //writes node Data
+    
+   /* var dictValue: [String: Any]{
+        
+        return [
+            ""
+        ]
+        
+    }*/
     
 
 

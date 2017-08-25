@@ -13,6 +13,7 @@ import FirebaseAuthUI
 import FirebaseDatabase
 
 var nodeProjects : [NodeProject] = []
+var cellProjects : [ProjectCell] = []
 
 class HubController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,ProjectCreatorDelegate, UISearchBarDelegate{
     
@@ -22,12 +23,15 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
     var collectionView: UICollectionView!
     
     var ref: DatabaseReference?
+    let cell = ProjectCell()
     
     let collectionColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         //changes collection view size
@@ -48,7 +52,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         //sets background color
         collectionView.backgroundColor = collectionColor
         //adds collection view
-
+        
         self.view.addSubview(collectionView)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,21 +67,13 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         
         ref = Database.database().reference()
         
+        //Snapshotting retrieval
+        
+        //THIS ONLY WORKS IF THERE IS PROJECTS THERE, YOUR GOING TO HAVE TO EITHER SET A PROJECT THERE OR TESTING IF THERE IS PROJECTS THERE IN THE FIRST PLACE
+        //YOU NEED TO ALSO BE ABLE TO DELETE PROJECTS....
+       retrieveData()
+        
     }
-    
-  /*  func receiveNodeProjects(projectName: String, projectDate: String, projectImage: UIImage){
-        
-        node = NodeProject()
-        node.projectName = projectName
-        node.projectDate = projectDate
-        node.projectImage = projectImage
-        
-        
-        
-        
-        nodeProjects.append(node)
-    }*/
-    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,42 +89,60 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        //retrievingService.updateProject()
         collectionView.reloadData()
+    
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        collectionView.reloadData()
     }
     
     // THIS IS IMPORTANT FOR CHANGING DATA FOR THE HUB PROJECTS
     //Setting names and Tags
     /*
-    func formCompleted(nameProject : String?, tag: Int?) {
-        collectionView.reloadData()
-        let node = NodeProject()
-        //Project Name Updated
-        node.projectName = nameProject
-        //Tag Selection
-        if tag == 0{
-            node.chosenTag = UIColor.red
-        }
-        else if tag == 1{
-            node.chosenTag = UIColor.yellow
-        }
-        else if tag == 2{
-            node.chosenTag = UIColor.green
-        }
-        else if tag == 3{
-            node.chosenTag = UIColor.blue
-        }
-        
-        //Add Projects To Hub
-        nodeProjects.append(node)
-    }*/
+     func formCompleted(nameProject : String?, tag: Int?) {
+     collectionView.reloadData()
+     let node = NodeProject()
+     //Project Name Updated
+     node.projectName = nameProject
+     //Tag Selection
+     if tag == 0{
+     node.chosenTag = UIColor.red
+     }
+     else if tag == 1{
+     node.chosenTag = UIColor.yellow
+     }
+     else if tag == 2{
+     node.chosenTag = UIColor.green
+     }
+     else if tag == 3{
+     node.chosenTag = UIColor.blue
+     }
+     
+     //Add Projects To Hub
+     nodeProjects.append(node)
+     }*/
     func formCompleted(nameproject: String?, dateCreated: String?) {
         collectionView.reloadData()
+        
+        
+        
+        
         let node = NodeProject()
         //Project Name Updated
         node.projectName = nameproject
         node.projectDate = dateCreated
         
+        
+        let cellProjectPreview = cell.projectPreview
+        
+        //FIREBASE
+        
+        //node.projectPreviewButton = cellProjectPreview
+       
         
         let user = Auth.auth().currentUser
         if let user = user{
@@ -143,10 +157,16 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         
         
         nodeProjects.append(node)
+        
+    }
+    
+    func retrieveData(){
+        collectionView.reloadData()
+        retrievingService.obtainProject()
     }
     
     
- 
+    
     
     func previewTapped(){
         let storyboard = UIStoryboard(name: "LayoutEditor", bundle: nil)
@@ -159,7 +179,7 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     
     //defines how many cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -167,15 +187,21 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
     }
     //defines cell properties
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! ProjectCell
         cell.nodeProject = nodeProjects[indexPath.item]
         cell.backgroundColor = UIColor.white
+        
+        /*for item in nodeProjects{
+         print(item.projectPreviewButton)
+         }*/
+        
         //cell.layer.borderColor = UIColor(red: 51/255,green: 153/255,blue: 255/255, alpha: 1).cgColor
         //cell.layer.borderWidth = 2
         //cell.backgroundColor = UIColor.red
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
@@ -185,6 +211,26 @@ class HubController : UIViewController, UICollectionViewDataSource, UICollection
     
     
 }
+
+//old codeee
+/*
+ 
+ //                            let myProjects = snapshot.value as
+ //
+ //                            for (key, anotherDict) in myProjects{
+ //                                let anotherDict = anotherDict as! NSDictionary
+ //
+ //                                var image: UIImage?
+ //                                if let url = NSURL(string: anotherDict["projectImage"] as! String) {
+ //                                    if let data = NSData(contentsOf: url as URL) {
+ //                                        image = UIImage(data: data as Data)
+ //                                    }
+ //                                }
+ //
+ //                                self.receiveNodeProjects(projectName: anotherDict["projectName"] as! String, projectDate: anotherDict["projectDate"] as! String, projectImage: image!, projectImageURL: anotherDict["projectImage"] as! String, projectKey: anotherDict["projectStorageImageKey"] as! String, storageKey: key as! String)
+ //
+ //                            }
+ */
 
 
 
