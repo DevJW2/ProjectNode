@@ -43,6 +43,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
     let zoomMaxWidth : CGFloat = UIScreen.main.bounds.width * 3.0
     let zoomMinWidth : CGFloat = 50.0
     
+    let ref: DatabaseReference = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,59 +91,81 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         self.view.isUserInteractionEnabled = true
         
         //self.view.addGestureRecognizer(longPressRecognizer)
-        
+        //addObtainedNodeToView()
     
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        obtainNode()
+        //obtainNode()
     }
     
     
     
     func obtainNode(){
-        let ref: DatabaseReference = Database.database().reference()
+        var nodeThere = false
+        
         if let user = Auth.auth().currentUser{
-            ref.child("nodes").child((getCurrentSelectedProject()?.specificKey)!).observeSingleEvent(of: .value, with: {(snapshot)
-                in
-                
-                
-                guard let myNodeSnapshots = snapshot.children.allObjects as? [DataSnapshot],
-                let myKey = snapshot.key as? String else {
-                    return
-                }
-                
-                for nodeSnapshots in myNodeSnapshots{
-                    if myKey == self.getCurrentSelectedProject()?.specificKey{
+            
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                for child in snapshot.children {
+                    let snap = child as! DataSnapshot
+                    let key = snap.key
+                    let value = snap.value
+                    //print("key = \(key)  value = \(value!)")
                     
-                        let nodeDict = nodeSnapshots.value as? [String: Any]
-                        let nodeName = nodeDict?["nodeName"] as? String
-                        let nodeDescription = nodeDict?["nodeDescription"] as? String
-                        let nodeLimit = nodeDict?["nodeLimit"] as? Int
-                        let xCoordinate = nodeDict?["xCoordinate"] as? Double
-                        let yCoordinate = nodeDict?["yCoordinate"] as? Double
-                        let color = nodeDict?["hexColor"] as? String
-                        let borderColor = nodeDict?["borderColor"] as? String
-                        let previousBorderColor = nodeDict?["previousBorderColor"] as? String
-                        let childNodes = nodeDict?["childNodes"] as? Int
-                        let tag = nodeDict?["tag"] as? Int
-                        
-                        self.createObtainedNode(nodeName: nodeName!, nodeDescription: nodeDescription!, nodeLimit: nodeLimit!, xCoordinate: xCoordinate!, yCoordinate: yCoordinate!, color: color!, borderColor: borderColor!, previousBorderColor: previousBorderColor!, childNodes: childNodes!, tag: tag!)
+                    if key == "node"{
+                        nodeThere = true
+                    }
+                }
+            })
+            
+            if nodeThere{
+            
+                ref.child("nodes").child((getCurrentSelectedProject()?.specificKey)!).observeSingleEvent(of: .value, with: {(snapshot)
+                    in
+                   
+        
+                    guard let myNodeSnapshots = snapshot.children.allObjects as? [DataSnapshot],
+                    let myKey = snapshot.key as? String else {
+                        return
                     }
                     
-                }
-                
-                
-            })
-        }
+                    for nodeSnapshots in myNodeSnapshots{
+                        if myKey == self.getCurrentSelectedProject()?.specificKey{
+                        
+                            let nodeDict = nodeSnapshots.value as? [String: Any]
+                            let nodeName = nodeDict?["nodeName"] as? String
+                            let nodeDescription = nodeDict?["nodeDescription"] as? String
+                            let nodeLimit = nodeDict?["nodeLimit"] as? Int
+                            let xCoordinate = nodeDict?["xCoordinate"] as? Double
+                            let yCoordinate = nodeDict?["yCoordinate"] as? Double
+                            let color = nodeDict?["hexColor"] as? String
+                            let borderColor = nodeDict?["borderColor"] as? String
+                            let previousBorderColor = nodeDict?["previousBorderColor"] as? String
+                            let childNodes = nodeDict?["childNodes"] as? Int
+                            let tag = nodeDict?["tag"] as? Int
+                            let connectedNodeProperties = nodeDict?["connectedNode"] as? [String: Any]
+                            
+                            self.createObtainedNode(nodeName: nodeName!, nodeDescription: nodeDescription!, nodeLimit: nodeLimit!, xCoordinate: xCoordinate!, yCoordinate: yCoordinate!, color: color!, borderColor: borderColor!, previousBorderColor: previousBorderColor!, childNodes: childNodes!, tag: tag!, connectedNodeProperties: connectedNodeProperties)
+                            
+                            
+                        }
+                        
+                    }
+                    
+                })
+            }
+            else{
+                print("node not there")
+            }
+            }
     
     }
     //Everytime it loads back in... it'll create more nodes, instead try making it update instead of add
     
-    func createObtainedNode(nodeName: String, nodeDescription: String, nodeLimit: Int, xCoordinate: Double, yCoordinate: Double, color: String, borderColor: String, previousBorderColor: String, childNodes: Int, tag: Int){
+    func createObtainedNode(nodeName: String, nodeDescription: String, nodeLimit: Int, xCoordinate: Double, yCoordinate: Double, color: String, borderColor: String, previousBorderColor: String, childNodes: Int, tag: Int, connectedNodeProperties: [String: Any]?){
         /*let ancestorNode = Node(_distance: 100, _color: nodeColor, _size: nodeSize, _name: "Hi!", _descript: "", _nodeLimit: 3, _xCoordinate: Double(UIScreen.main.bounds.width/2), _yCoordinate: Double(UIScreen.main.bounds.height/2))*/
         
-    
         
         let node = Node(_distance: 100, _color: hexStringToUIColor(hex: color), _size: 50, _name: nodeName, _descript: nodeDescription, _nodeLimit: nodeLimit, _xCoordinate: xCoordinate, _yCoordinate: yCoordinate)
         
@@ -151,6 +174,38 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         node.childNodes = childNodes
         node.getNode().tag = tag
         
+        
+        //set properties
+        let connectedNodeColor = connectedNodeProperties?["hexColor"] as? String
+        let connectedNodeName = connectedNodeProperties?["nodeName"] as? String
+        let connectedNodeDescription = connectedNodeProperties?["nodeDescription"] as? String
+        let connectedNodeLimit = connectedNodeProperties?["nodeLimit"] as? Int
+        let connectedXCoordinate = connectedNodeProperties?["xCoordinate"] as? Double
+        let connectedYCoordinate = connectedNodeProperties?["yCoordinate"] as? Double
+        let connectedBorderColor = connectedNodeProperties?["borderColor"] as? String
+        let connectedPreviousBorderColor = connectedNodeProperties?["previousBorderColor"] as? String
+        let connectedChildNodes = connectedNodeProperties?["childNodes"] as? Int
+        let connectedTag = connectedNodeProperties?["tag"] as? Int
+        
+        
+    
+        //Create connected Node
+        if connectedNodeProperties != nil{
+        
+            let connectedNode = Node(_distance: 100, _color: hexStringToUIColor(hex: connectedNodeColor!), _size: 50, _name: connectedNodeName!, _descript: connectedNodeDescription!, _nodeLimit: connectedNodeLimit!, _xCoordinate: connectedXCoordinate!, _yCoordinate: connectedYCoordinate!)
+            
+            connectedNode.setBorderColor(value: hexStringToUIColor(hex: connectedBorderColor!))
+            connectedNode.setPreviousBorderColor(value: hexStringToUIColor(hex: connectedPreviousBorderColor!))
+            connectedNode.childNodes = connectedChildNodes!
+            connectedNode.getNode().tag = connectedTag!
+                
+                 node.setConnectedNode(item: connectedNode)
+        }
+        
+        
+
+        
+    
        /* if node.getNode().tag == -99{
             selectedNode = node
         } */
@@ -160,7 +215,7 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         //canvas.addSubview(node.getNode())
     }
     
-    func addObtainedNodeToView(value: Node){
+    func addObtainedNodeToView(){
         /*nodeList.append(newNode!)
         
         canvas.addSubview(newNode!.getNode())
@@ -171,13 +226,20 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
         //createNodeConnection(selectNode: selectedNode!, createdNode: newNode!)
         canvas.insertSubview(newNode!.getNode(), belowSubview: nodeCreator)
         createNodeConnection(selectNode: newNode!, createdNode: selectedNode!)*/
-
-        
+        obtainNode()
+        print("node list")
+        print(nodeList)
         
         for node in nodeList{
             canvas.addSubview(node.getNode())
             for connected in nodeList{
+                print("This is the node outside")
+                print(node)
+                print("These are the nodes being compared to inside")
+                print(connected)
+                
                 if node == connected.connectedNode{
+                    print("They printed out to be true")
                     createNodeConnection(selectNode: node, createdNode: connected)
                 }
             }
@@ -242,19 +304,26 @@ class NodeMapController : UIViewController, NodeEditorControllerDelegate{
             })
          }*/
         
+        
         //Updates firebase for each node
-        let rootref = Database.database().reference()
-        let newNodeRef = rootref.child("nodes").child((getCurrentSelectedProject()?.specificKey)!)
-        for node in nodeList{
-            let randomNodeKey = NSUUID().uuidString
-            newNodeRef.updateChildValues([randomNodeKey: node.dictValue])
-        }
+        updateFirNode()
         
         //Works after you get the connections
         //removeNodes(node: nodeList[0])
         
         dismiss(animated: true, completion: nil)
     }
+    
+    func updateFirNode(){
+        let rootref = Database.database().reference()
+        let newNodeRef = rootref.child("nodes").child((getCurrentSelectedProject()?.specificKey)!)
+        for node in nodeList{
+            let randomNodeKey = NSUUID().uuidString
+            newNodeRef.updateChildValues([randomNodeKey: node.dictValue])
+        }
+    }
+    
+    
     
     func pinchedView(sender: UIPinchGestureRecognizer){
         if canvas.frame.size.width < zoomMaxWidth && canvas.frame.size.width > zoomMinWidth{
